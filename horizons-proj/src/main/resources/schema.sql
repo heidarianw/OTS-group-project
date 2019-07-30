@@ -50,7 +50,7 @@ create table daycare (
 create table daycareMap (
     id serial primary key,
     cid int references child(id),
-    did int referrences daycare(id)
+    did int references daycare(id)
 );
 
 create table personality (
@@ -61,7 +61,7 @@ create table personality (
 create table personalityMap (
     id serial primary key,
     cid int references child(id),
-    persid int referrences personality(id)
+    persid int references personality(id)
 );
 
 create table allergy (
@@ -72,5 +72,5 @@ create table allergy (
 create table allergyMap (
     id serial primary key,
     cid int references child(id),
-    aid int referrences allergy(id)
+    aid int references allergy(id)
 );
