@@ -28,4 +28,8 @@ public class Allergy {
     public void setAllergy(String allergy) {
         this.allergy = allergy;
     }
+
+    public Allergy(String allergy) {
+        this.allergy = allergy;
+    }
 }
