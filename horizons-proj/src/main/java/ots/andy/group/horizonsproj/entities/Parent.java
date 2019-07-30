@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Parent {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column (name = "first")

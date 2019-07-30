@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name="allergymap")
 public class AllergyMap {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "cid")
@@ -38,6 +38,8 @@ public class AllergyMap {
     public void setAid(int aid) {
         this.aid = aid;
     }
+
+    public AllergyMap() {}
 
     public AllergyMap(int cid, int aid) {
         this.cid = cid;

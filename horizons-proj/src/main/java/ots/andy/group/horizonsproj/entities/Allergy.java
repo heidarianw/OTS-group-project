@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Allergy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "allergy")
