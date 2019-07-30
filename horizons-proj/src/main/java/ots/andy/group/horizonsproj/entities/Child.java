@@ -1,14 +1,12 @@
 package ots.andy.group.horizonsproj.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="child")
 public class Child {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @Column(name = "first")
@@ -41,14 +39,28 @@ public class Child {
     @Column(name = "saturday")
     private boolean saturday;
 
-    //Check on many to one relationship
-    @Column(name = "sid")
+    @Column(name = "statusid")
     private int sid;
 
     @Column(name = "photo")
     private String photo;
 
     public Child() {
+    }
+
+    public Child(String first, String last, int age, boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, int status, String photo) {
+        this.first = first;
+        this.last = last;
+        this.age = age;
+        this.sunday = sunday;
+        this.monday = monday;
+        this.tuesday = tuesday;
+        this.wednesday = wednesday;
+        this.thursday = thursday;
+        this.friday = friday;
+        this.saturday = saturday;
+        this.sid = status;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -139,11 +151,11 @@ public class Child {
         this.saturday = saturday;
     }
 
-    public int getSid() {
+    public int getStatus() {
         return sid;
     }
 
-    public void setSid(int sid) {
+    public void setStatus(int sid) {
         this.sid = sid;
     }
 
@@ -169,7 +181,7 @@ public class Child {
                 ", thursday=" + thursday +
                 ", friday=" + friday +
                 ", saturday=" + saturday +
-                ", sid=" + sid +
+                ", status=" + sid +
                 ", photo='" + photo + '\'' +
                 '}';
     }

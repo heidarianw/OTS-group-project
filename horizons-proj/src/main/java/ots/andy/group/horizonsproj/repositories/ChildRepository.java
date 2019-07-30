@@ -7,4 +7,6 @@ import ots.andy.group.horizonsproj.entities.Child;
 @Repository
 public interface ChildRepository extends JpaRepository<Child, Integer> {
 
+    //public void insertToDB(Child x);
+
 }
