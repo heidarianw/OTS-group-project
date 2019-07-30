@@ -18,4 +18,5 @@ public class ChildController {
     List<Child> findAll() {
         return repository.findAll();
     }
+
 }

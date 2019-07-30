@@ -21,7 +21,6 @@ class ParentController {
         this.repository = repository;
     }
 
-
     List<Parent> findAll() {
         return repository.findAll();
     }
