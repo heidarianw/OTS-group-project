@@ -22,7 +22,7 @@ insert into allergy values
 	(default, 'Garlic'),
 	(default, 'Kiwi'),
 	(default, 'Maize'),
-	(default, 'Gellatin'),
+	(default, 'Gelatin'),
 	(default, 'Apples'),
 	(default, 'Cinnamon'),
 	(default, 'Citrus'),

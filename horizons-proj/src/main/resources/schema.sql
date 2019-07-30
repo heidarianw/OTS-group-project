@@ -1,29 +1,29 @@
 create table employee (
     id serial primary key,
-    first string not null,
-    last string not null,
-    email string not null,
-    password string not null
+    first text not null,
+    last text not null,
+    email text not null,
+    password text not null
 );
 
 create table status (
     id serial primary key,
-    status string not null
+    status text not null
 );
 
 create table parent (
     id serial primary key,
-    first string not null,
-    last string not null,
-    email string not null,
-    password string not null,
-    phone string
+    first text not null,
+    last text not null,
+    email text not null,
+    password text not null,
+    phone text
 );
 
 create table child (
     id serial primary key,
-    first string not null,
-    last string not null,
+    first text not null,
+    last text not null,
     age int not null,
     sunday boolean,
     monday boolean,
@@ -33,7 +33,7 @@ create table child (
     friday boolean,
     saturday boolean,
     statusid int references status(id),
-    photo string
+    photo text
 );
 
 create table parentmap (
@@ -44,7 +44,7 @@ create table parentmap (
 
 create table daycare (
     id serial primary key,
-    daycare string not null
+    daycare text not null
 );
 
 create table daycareMap (
@@ -55,7 +55,7 @@ create table daycareMap (
 
 create table personality (
     id serial primary key,
-    personality string not null
+    personality text not null
 );
 
 create table personalityMap (
@@ -66,7 +66,7 @@ create table personalityMap (
 
 create table allergy (
     id serial primary key,
-    allergy string not null
+    allergy text not null
 );
 
 create table allergyMap (
