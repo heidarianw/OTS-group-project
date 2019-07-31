@@ -9,6 +9,7 @@ import ots.andy.group.horizonsproj.repositories.ParentRepository;
 @RestController
 class ParentController {
 
+
     private final ParentRepository repository;
 
     ParentController(ParentRepository repository) {
