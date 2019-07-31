@@ -23,7 +23,6 @@ public class ChildController {
 
     @PostMapping("/parent/addChild")
     public ResponseEntity addChild(@RequestBody Child child){
-
         return childService.addChild(child);
     }
 }
