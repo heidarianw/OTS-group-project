@@ -13,7 +13,7 @@ public class ChildService {
     private ChildRepository childRepository;
 
     public ResponseEntity addChild(Child child){
-        if(child.getFirst() != null && child.getLast() != null && child.getAge() != 0 && child.getStatus() != null){
+        if(child.getFirst() != null && child.getLast() != null && child.getAge() != 0){
             childRepository.save(child);
             return new ResponseEntity(HttpStatus.OK);
         }
