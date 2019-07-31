@@ -16,5 +16,5 @@ public interface ChildRepository extends JpaRepository<Child, Integer> {
 
     //public void insertToDB(Child x);
     public long countByFirst(String First);
-    
+
 }
