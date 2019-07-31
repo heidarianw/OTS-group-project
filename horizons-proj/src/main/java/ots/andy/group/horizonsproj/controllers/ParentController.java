@@ -1,6 +1,6 @@
 package ots.andy.group.horizonsproj.controllers;
 
-import com.sun.tools.javac.comp.Resolve;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -9,13 +9,13 @@ import java.util.Set;
 public class Allergy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id = 1;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "allergy")
     private String allergy;
 
-    @ManyToMany(mappedBy = "allergySet")
+    @ManyToMany(mappedBy = "allergySet",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Child> childSet = new HashSet<>();
 
     public Set<Child> getChildren() {
