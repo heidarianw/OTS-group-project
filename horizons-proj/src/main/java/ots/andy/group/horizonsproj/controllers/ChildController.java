@@ -22,7 +22,6 @@ public class ChildController {
 
     @PostMapping("/parent/addChild")
     public ResponseEntity addChild(@RequestBody Child child){
-        System.out.println(child.toString());
         return childService.addChild(child);
     }
 }

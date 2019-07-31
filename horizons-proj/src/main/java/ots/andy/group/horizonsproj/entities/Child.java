@@ -65,18 +65,19 @@ public class Child {
     private Set<Parent> parentSet = new HashSet<>();
 
     @ManyToOne()
-    @JoinColumn(name = "personalityid", updatable = false, insertable = false)
+    @JoinColumn(name = "personalityid")
     private Personality personality;
 
     @ManyToOne()
-    @JoinColumn(name = "daycareid", updatable = false, insertable = false)
+    @JoinColumn(name = "daycareid")
     private Daycare daycare;
 
     @ManyToOne()
-    @JoinColumn(name = "statusid", updatable = false, insertable = false)
+    @JoinColumn(name = "statusid")
     private Status status;
 
     public Child() {
+
     }
 
     public Child(String first, String last, int age, boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, String photo) {
