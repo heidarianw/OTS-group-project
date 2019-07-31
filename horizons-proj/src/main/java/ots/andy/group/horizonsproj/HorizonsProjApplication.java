@@ -28,8 +28,5 @@ public class HorizonsProjApplication implements CommandLineRunner {
 	@Override
 	public void run(String... arg0) throws Exception {
 		System.out.println("Ready");
-		EncryptionService e = new EncryptionService();
-		String enc = e.encryptionService().encode("password");
-		System.out.println(e.encryptionService().matches("password", enc));
 	}
 }

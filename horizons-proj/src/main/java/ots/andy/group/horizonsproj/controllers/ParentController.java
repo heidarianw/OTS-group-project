@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
+import ots.andy.group.horizonsproj.services.EncryptionService;
 import ots.andy.group.horizonsproj.services.ParentService;
 
 import java.util.List;

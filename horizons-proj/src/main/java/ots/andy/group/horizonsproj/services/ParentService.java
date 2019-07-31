@@ -8,18 +8,20 @@ import ots.andy.group.horizonsproj.repositories.ParentRepository;
 @Service
 public class ParentService {
 
+    EncryptionService e = new EncryptionService();
+
     @Autowired
     private ParentRepository parentRepository;
 
-    public boolean addParent(Parent parent){
+    public boolean addParent(Parent parent) {
         if (!parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
             return false;
         }
-        else {
-            System.out.println("Adding parent...");
-            parentRepository.save(parent);
-            return true;
-        }
+        String enc = e.encryptionService().encode(parent.getPassword());
+        parent.setPassword(enc);
+        System.out.println("Adding parent...");
+        parentRepository.save(parent);
+        return true;
     }
 
     public String getAllParents(){
