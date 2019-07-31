@@ -11,6 +11,8 @@ import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.AllergyMapRepository;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
+import java.sql.SQLOutput;
+
 @SpringBootApplication
 public class HorizonsProjApplication implements CommandLineRunner {
 
@@ -25,9 +27,6 @@ public class HorizonsProjApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-		Child x = new Child("clay", "k", 22, false, false, false, false, false, false, false, 1, "url");
-		repo.save(x);
-		AllergyMap a1 = new AllergyMap(x.getId(), 5);
-		allergyMapRepo.save(a1);
+		System.out.println("Ready");
 	}
 }

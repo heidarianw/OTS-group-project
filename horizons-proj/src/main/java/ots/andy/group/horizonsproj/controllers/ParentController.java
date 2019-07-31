@@ -1,17 +1,25 @@
 package ots.andy.group.horizonsproj.controllers;
 
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
+import ots.andy.group.horizonsproj.services.ParentService;
+
+import java.util.List;
 
 @RestController
 class ParentController {
 
+    @Autowired
     private final ParentRepository repository;
+
+    @Autowired
+    private ParentService parentService;
 
     ParentController(ParentRepository repository) {
         this.repository = repository;
@@ -21,9 +29,10 @@ class ParentController {
         return repository.findAll();
     }
 
-    @PostMapping(path = "/parent/signup")
-    public void createParent(@RequestBody Parent parent){
-
+    @PostMapping(path = "/parent/register")
+    public ResponseEntity createParent(@RequestBody Parent parent){
+        parentService.registerParent(parent);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
