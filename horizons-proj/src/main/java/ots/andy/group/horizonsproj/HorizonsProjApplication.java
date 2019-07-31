@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.Query;
 import ots.andy.group.horizonsproj.entities.Allergy;
-import ots.andy.group.horizonsproj.entities.AllergyMap;
 import ots.andy.group.horizonsproj.entities.Child;
-import ots.andy.group.horizonsproj.repositories.AllergyMapRepository;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
 import java.sql.SQLOutput;
@@ -18,8 +17,7 @@ public class HorizonsProjApplication implements CommandLineRunner {
 
 	@Autowired
 	private ChildRepository repo;
-	@Autowired
-	private AllergyMapRepository allergyMapRepo;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(HorizonsProjApplication.class, args);

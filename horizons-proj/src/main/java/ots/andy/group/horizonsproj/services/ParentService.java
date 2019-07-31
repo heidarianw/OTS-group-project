@@ -11,7 +11,7 @@ public class ParentService {
     @Autowired
     private ParentRepository parentRepository;
 
-    public void registerParent(Parent parent){
+    public void addParent(Parent parent){
         System.out.println(parentRepository.findByEmail(parent.getEmail()));
         if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
             System.out.println("Adding parent...");

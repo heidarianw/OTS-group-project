@@ -31,7 +31,7 @@ class ParentController {
 
     @PostMapping(path = "/parent/register")
     public ResponseEntity createParent(@RequestBody Parent parent){
-        parentService.registerParent(parent);
+        parentService.addParent(parent);
         return new ResponseEntity(HttpStatus.OK);
     }
 
