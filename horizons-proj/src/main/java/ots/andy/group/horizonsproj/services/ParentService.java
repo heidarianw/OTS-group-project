@@ -11,13 +11,14 @@ public class ParentService {
     @Autowired
     private ParentRepository parentRepository;
 
-    public void addParent(Parent parent){
-        if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
-            System.out.println("Adding parent...");
-            parentRepository.save(parent);
+    public boolean addParent(Parent parent){
+        if (!parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
+            return false;
         }
         else {
-            System.out.println("Email already in use... \n");
+            System.out.println("Adding parent...");
+            parentRepository.save(parent);
+            return true;
         }
     }
 

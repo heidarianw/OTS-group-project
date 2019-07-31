@@ -1,6 +1,5 @@
 package ots.andy.group.horizonsproj.controllers;
 
-import com.sun.tools.javac.comp.Resolve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +32,10 @@ class ParentController {
 
     @PostMapping(path = "/parent/register")
     public ResponseEntity createParent(@RequestBody Parent parent){
-        parentService.addParent(parent);
-        return new ResponseEntity(HttpStatus.OK); //status
+        if (parentService.addParent(parent)) {
+            return new ResponseEntity(HttpStatus.OK); //status
+        }
+        else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
     }
 
     @GetMapping(path="/parent/all/{var}")
