@@ -25,7 +25,15 @@ public class Parent {
     @Column (name = "phone")
     private String phone;
 
-    Parent() {}
+    public Parent() {}
+
+    public Parent(String first, String last, String email, String password, String phone) {
+        this.first = first;
+        this.last = last;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 
     public int getId() {
         return id;
