@@ -4,11 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ots.andy.group.horizonsproj.entities.Allergy;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
-
-import java.util.List;
 
 @Service
 public class ChildService {

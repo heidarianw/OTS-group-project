@@ -26,6 +26,13 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(String first, String last, String email, String password) {
+        this.first = first;
+        this.last = last;
+        this.email = email;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }
