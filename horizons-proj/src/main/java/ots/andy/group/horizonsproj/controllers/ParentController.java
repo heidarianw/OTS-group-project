@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
+import ots.andy.group.horizonsproj.services.EncryptionService;
 import ots.andy.group.horizonsproj.services.ParentService;
 
 import java.util.List;
@@ -38,7 +39,19 @@ class ParentController {
         else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
     }
 
-    @GetMapping(path = "/parent/all")
+    @GetMapping(path="/parent/login")
+    public ResponseEntity loginParent(@RequestBody Parent parent) {
+        int response = parentService.loginParent(parent);
+        if (response == 0) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        else if (response == 1) {
+            return new ResponseEntity("Password incorrect", HttpStatus.OK);
+        }
+        return new ResponseEntity("Email does not exist", HttpStatus.OK);
+    }
+
+    @GetMapping(path="/parent/all/{var}")
     public String getAllParents(){
         return parentService.getAllParents();
     }
