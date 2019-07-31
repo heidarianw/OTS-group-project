@@ -12,7 +12,6 @@ public class ParentService {
     private ParentRepository parentRepository;
 
     public void addParent(Parent parent){
-        System.out.println(parentRepository.findByEmail(parent.getEmail()));
         if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
             System.out.println("Adding parent...");
             parentRepository.save(parent);
@@ -20,6 +19,10 @@ public class ParentService {
         else {
             System.out.println("Email already in use... \n");
         }
+    }
+
+    public String getAllParents(){
+        return parentRepository.findAll().toString();
     }
 
 }
