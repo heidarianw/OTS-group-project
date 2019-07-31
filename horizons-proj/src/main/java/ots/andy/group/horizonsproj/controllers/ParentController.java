@@ -1,5 +1,9 @@
 package ots.andy.group.horizonsproj.controllers;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4e3616c54cbd93ad6249c80e54c32f66eca67b1d
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

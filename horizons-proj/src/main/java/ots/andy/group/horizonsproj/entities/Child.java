@@ -47,18 +47,16 @@ public class Child {
     private String photo;
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+            CascadeType.PERSIST
+    },fetch = FetchType.LAZY)
     @JoinTable(name = "allergymap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "aid"))
     private Set<Allergy> allergySet = new HashSet<>();
 
     @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+            CascadeType.PERSIST
+    },fetch = FetchType.LAZY)
     @JoinTable(name = "parentmap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "pid"))
@@ -102,6 +100,12 @@ public class Child {
     public void removeAllergy(Allergy allergy) {
         allergySet.remove(allergy);
         allergy.getChildren().remove(this);
+    }
+
+    public void addAllergies(List<Allergy> allergyList){
+        for(Allergy a : allergyList){
+            this.addAllergy(a);
+        }
     }
 
     public void addParent(Parent parent) {

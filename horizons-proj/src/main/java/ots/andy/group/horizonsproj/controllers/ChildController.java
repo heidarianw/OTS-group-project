@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ots.andy.group.horizonsproj.entities.Allergy;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 import ots.andy.group.horizonsproj.services.ChildService;
