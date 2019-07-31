@@ -130,7 +130,7 @@ public class Child {
         this.status = status;
         status.getChildren().add(this);
     }
-
+    
     public Set<Allergy> getAllergySet() {
         return allergySet;
     }

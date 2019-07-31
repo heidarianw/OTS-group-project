@@ -12,6 +12,7 @@ import java.util.List;
 public interface ChildRepository extends JpaRepository<Child, Integer> {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @Query(value = "SELECT COUNT(*) FROM child WHERE id = ?", nativeQuery = true)
     public long queryCount(int id);
@@ -20,4 +21,6 @@ public interface ChildRepository extends JpaRepository<Child, Integer> {
     public long countByFirst(String First);
 
 >>>>>>> b5fbd0437f83f6a34e4ec064f4a163be1117c09b
+=======
+>>>>>>> parentRegistration
 }

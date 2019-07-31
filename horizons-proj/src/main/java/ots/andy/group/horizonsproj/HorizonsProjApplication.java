@@ -10,6 +10,8 @@ import ots.andy.group.horizonsproj.entities.Allergy;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
+import java.sql.SQLOutput;
+
 @SpringBootApplication
 public class HorizonsProjApplication implements CommandLineRunner {
 
@@ -23,11 +25,6 @@ public class HorizonsProjApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... arg0) throws Exception {
-//		Child x = new Child("clay", "k", 22, false, false, false, false, false, false, false, 1, "url");
-//		Allergy a = new Allergy("Peanut");
-//		x.addAllergy(a);
-//		repo.save(x);
-		//System.out.println(repo.queryCount(3));
-		//System.out.println(repo.countByFirst(x.getFirst()));
+		System.out.println("Ready");
 	}
 }
