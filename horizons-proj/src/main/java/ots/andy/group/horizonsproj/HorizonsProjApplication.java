@@ -30,5 +30,4 @@ public class HorizonsProjApplication implements CommandLineRunner {
 		AllergyMap a1 = new AllergyMap(x.getId(), 5);
 		allergyMapRepo.save(a1);
 	}
-
 }
