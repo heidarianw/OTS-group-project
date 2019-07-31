@@ -227,6 +227,14 @@ public class Child {
         this.photo = photo;
     }
 
+    public String getStatus() {
+        return status.getStatus();
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Child{" +
