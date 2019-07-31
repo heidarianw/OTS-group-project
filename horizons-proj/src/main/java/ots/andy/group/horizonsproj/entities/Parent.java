@@ -1,6 +1,8 @@
 package ots.andy.group.horizonsproj.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="parent")
@@ -26,6 +28,13 @@ public class Parent {
     private String phone;
 
     Parent() {}
+
+    @ManyToMany(mappedBy = "parentSet")
+    private Set<Child> childSet = new HashSet<>();
+
+    public Set<Child> getChildren() {
+        return childSet;
+    }
 
     public int getId() {
         return id;

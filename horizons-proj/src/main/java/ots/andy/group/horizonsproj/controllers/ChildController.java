@@ -13,8 +13,8 @@ public class ChildController {
 
     private final ChildRepository repository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    //@PersistenceContext
+    //private EntityManager entityManager;
 
     ChildController(ChildRepository repository) { this.repository = repository; }
 
