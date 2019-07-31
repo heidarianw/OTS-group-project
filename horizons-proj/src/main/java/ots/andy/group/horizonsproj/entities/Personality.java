@@ -40,4 +40,7 @@ public class Personality {
     public Personality(String personality) {
         this.personality = personality;
     }
+
+    public Personality() {
+    }
 }

@@ -40,4 +40,7 @@ public class Daycare {
     public Daycare(String daycare) {
         this.daycare = daycare;
     }
+
+    public Daycare() {
+    }
 }
