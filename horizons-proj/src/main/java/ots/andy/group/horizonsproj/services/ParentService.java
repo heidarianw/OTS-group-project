@@ -28,4 +28,14 @@ public class ParentService {
         return parentRepository.findAll().toString();
     }
 
+    public int loginParent(Parent parent) {
+        if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
+            return 2;
+        }
+        String encryptedPass = parentRepository.findByEmail(parent.getEmail()).get(0).getPassword();
+        if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
+            return 0;
+        }
+        return 1;
+    }
 }

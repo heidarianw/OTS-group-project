@@ -39,6 +39,18 @@ class ParentController {
         else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
     }
 
+    @GetMapping(path="/parent/login")
+    public ResponseEntity loginParent(@RequestBody Parent parent) {
+        int response = parentService.loginParent(parent);
+        if (response == 0) {
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        else if (response == 1) {
+            return new ResponseEntity("Password incorrect", HttpStatus.OK);
+        }
+        return new ResponseEntity("Email does not exist", HttpStatus.OK);
+    }
+
     @GetMapping(path="/parent/all/{var}")
     public String getAllParents(){
         return parentService.getAllParents();
