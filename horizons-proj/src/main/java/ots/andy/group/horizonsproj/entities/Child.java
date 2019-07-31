@@ -113,25 +113,31 @@ public class Child {
         parent.getChildren().remove(this);
     }
 
-    public void updatePersonality(Personality personality) {
+    public void setPersonality(Personality personality) {
         personality.getChildren().remove(this);
         this.personality = personality;
         personality.getChildren().add(this);
     }
 
-    public void updateDaycare(Daycare daycare) {
+    public void setDaycare(Daycare daycare) {
         daycare.getChildren().remove(this);
         this.daycare = daycare;
         daycare.getChildren().add(this);
     }
 
-    public void updateStatus(Status status) {
+    public void setStatus(Status status) {
         status.getChildren().remove(this);
         this.status = status;
         status.getChildren().add(this);
     }
 
+    public Set<Allergy> getAllergySet() {
+        return allergySet;
+    }
 
+    public Set<Parent> getParentSet() {
+        return parentSet;
+    }
 
     public int getId() {
         return id;
@@ -233,8 +239,12 @@ public class Child {
         return status.getStatus();
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public String getDaycare() {
+        return daycare.getDaycare();
+    }
+
+    public String getPersonality() {
+        return personality.getPersonality();
     }
 
     @Override
@@ -251,8 +261,10 @@ public class Child {
                 ", thursday=" + thursday +
                 ", friday=" + friday +
                 ", saturday=" + saturday +
-                //", status=" + sid +
                 ", photo='" + photo + '\'' +
+                ", personality=" + personality +
+                ", daycare=" + daycare +
+                ", status=" + status +
                 '}';
     }
 }
