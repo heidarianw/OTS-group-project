@@ -38,7 +38,7 @@ class ParentController {
         else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
     }
 
-    @GetMapping(path="/parent/all/{var}")
+    @GetMapping(path = "/parent/all")
     public String getAllParents(){
         return parentService.getAllParents();
     }
