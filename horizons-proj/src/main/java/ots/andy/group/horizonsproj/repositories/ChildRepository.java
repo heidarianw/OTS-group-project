@@ -12,10 +12,4 @@ import java.util.List;
 public interface ChildRepository extends JpaRepository<Child, Integer> {
 
 
-    @Query(value = "SELECT COUNT(*) FROM child WHERE id = ?", nativeQuery = true)
-    public long queryCount(int id);
-
-    //public void insertToDB(Child x);
-    public long countByFirst(String First);
-
 }

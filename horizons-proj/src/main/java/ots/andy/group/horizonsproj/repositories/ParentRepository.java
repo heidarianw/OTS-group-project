@@ -12,4 +12,5 @@ public interface ParentRepository extends JpaRepository<Parent, Integer> {
 
     List<Parent> findByEmail(String email);
 
+
 }
