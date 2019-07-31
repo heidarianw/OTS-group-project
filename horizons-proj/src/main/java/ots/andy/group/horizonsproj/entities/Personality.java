@@ -25,6 +25,14 @@ public class Personality {
         this.id = id;
     }
 
+    public String getPersonality() {
+        return personality;
+    }
+
+    public void setPersonality(String personality) {
+        this.personality = personality;
+    }
+
     public Set<Child> getChildren() {
         return childSet;
     }
