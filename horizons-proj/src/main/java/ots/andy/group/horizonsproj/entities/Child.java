@@ -1,13 +1,17 @@
 package ots.andy.group.horizonsproj.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="child")
 public class Child {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id = 1;
 
     @Column(name = "first")
     private String first;
@@ -39,16 +43,43 @@ public class Child {
     @Column(name = "saturday")
     private boolean saturday;
 
-    @Column(name = "statusid")
-    private int sid;
-
     @Column(name = "photo")
     private String photo;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "allergymap",
+            joinColumns = @JoinColumn(name = "cid"),
+            inverseJoinColumns = @JoinColumn(name = "aid"))
+    private Set<Allergy> allergySet = new HashSet<>();
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "parentmap",
+            joinColumns = @JoinColumn(name = "cid"),
+            inverseJoinColumns = @JoinColumn(name = "pid"))
+    private Set<Parent> parentSet = new HashSet<>();
+
+    @ManyToOne()
+    @JoinColumn(name = "personalityid", updatable = false, insertable = false)
+    private Personality personality;
+
+    @ManyToOne()
+    @JoinColumn(name = "daycareid", updatable = false, insertable = false)
+    private Daycare daycare;
+
+    @ManyToOne()
+    @JoinColumn(name = "statusid", updatable = false, insertable = false)
+    private Status status;
 
     public Child() {
     }
 
-    public Child(String first, String last, int age, boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, int status, String photo) {
+    public Child(String first, String last, int age, boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, String photo) {
         this.first = first;
         this.last = last;
         this.age = age;
@@ -59,9 +90,48 @@ public class Child {
         this.thursday = thursday;
         this.friday = friday;
         this.saturday = saturday;
-        this.sid = status;
         this.photo = photo;
     }
+
+    public void addAllergy(Allergy allergy) {
+        allergySet.add(allergy);
+        allergy.getChildren().add(this);
+    }
+
+    public void removeAllergy(Allergy allergy) {
+        allergySet.remove(allergy);
+        allergy.getChildren().remove(this);
+    }
+
+    public void addParent(Parent parent) {
+        parentSet.add(parent);
+        parent.getChildren().add(this);
+    }
+
+    public void removeParent(Parent parent) {
+        parentSet.remove(parent);
+        parent.getChildren().remove(this);
+    }
+
+    public void updatePersonality(Personality personality) {
+        personality.getChildren().remove(this);
+        this.personality = personality;
+        personality.getChildren().add(this);
+    }
+
+    public void updateDaycare(Daycare daycare) {
+        daycare.getChildren().remove(this);
+        this.daycare = daycare;
+        daycare.getChildren().add(this);
+    }
+
+    public void updateStatus(Status status) {
+        status.getChildren().remove(this);
+        this.status = status;
+        status.getChildren().add(this);
+    }
+
+
 
     public int getId() {
         return id;
@@ -151,14 +221,6 @@ public class Child {
         this.saturday = saturday;
     }
 
-    public int getStatus() {
-        return sid;
-    }
-
-    public void setStatus(int sid) {
-        this.sid = sid;
-    }
-
     public String getPhoto() {
         return photo;
     }
@@ -181,7 +243,7 @@ public class Child {
                 ", thursday=" + thursday +
                 ", friday=" + friday +
                 ", saturday=" + saturday +
-                ", status=" + sid +
+                //", status=" + sid +
                 ", photo='" + photo + '\'' +
                 '}';
     }

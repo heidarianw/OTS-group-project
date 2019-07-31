@@ -1,6 +1,8 @@
 package ots.andy.group.horizonsproj.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="allergy")
@@ -8,10 +10,17 @@ public class Allergy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id = 1;
 
     @Column(name = "allergy")
     private String allergy;
+
+    @ManyToMany(mappedBy = "allergySet")
+    private Set<Child> childSet = new HashSet<>();
+
+    public Set<Child> getChildren() {
+        return childSet;
+    }
 
     public int getId() {
         return id;
@@ -31,5 +40,8 @@ public class Allergy {
 
     public Allergy(String allergy) {
         this.allergy = allergy;
+    }
+
+    public Allergy() {
     }
 }
