@@ -3,8 +3,10 @@ package ots.andy.group.horizonsproj.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
 import ots.andy.group.horizonsproj.services.EncryptionService;
@@ -50,10 +52,15 @@ class ParentController {
         return new ResponseEntity("Email does not exist", HttpStatus.OK);
     }
 
-
     @GetMapping(path="/parent/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Parent> getAllParents(){
         return parentService.getAllParents();
+    }
+
+    @PostMapping(path="/parent/updateInfo")
+    public ResponseEntity updateInfo(@RequestBody Parent parent) {
+        if (parentService.updateInfo(parent)) return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("Cannot update info", HttpStatus.OK);
     }
 
 }

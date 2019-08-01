@@ -13,12 +13,23 @@ public class ChildService {
     private ChildRepository childRepository;
 
     public ResponseEntity addChild(Child child){
-        if(child.getFirst() != null && child.getLast() != null && child.getAge() != 0){
+        if(child.getFirst() != null && child.getLast() != null && child.getAge() >= 0){
             childRepository.save(child);
             return new ResponseEntity(HttpStatus.OK);
         }
         else {
-            return new ResponseEntity("The else", HttpStatus.OK);
+            return new ResponseEntity("Bad Child Info", HttpStatus.OK);
         }
+    }
+
+    // Must have id in the field!
+    public ResponseEntity updateInfo(Child child) {
+        if (childRepository.findById(child.getId()).isEmpty()) {
+            return new ResponseEntity("No such child exists", HttpStatus.OK);
+        }
+        if (child.getFirst() != null && child.getLast() != null && child.getAge() >= 0) {
+            childRepository.save(child);
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

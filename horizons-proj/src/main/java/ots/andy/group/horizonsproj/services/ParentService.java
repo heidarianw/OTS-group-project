@@ -7,6 +7,9 @@ import ots.andy.group.horizonsproj.repositories.ParentRepository;
 
 import java.util.List;
 
+import java.util.Iterator;
+import java.util.Set;
+
 @Service
 public class ParentService {
 
@@ -15,12 +18,18 @@ public class ParentService {
     @Autowired
     private ParentRepository parentRepository;
 
+
+    public void saveNewInfo(Parent parent) {
+        String enc = e.encryptionService().encode(parent.getPassword());
+        parent.setPassword(enc);
+        parentRepository.save(parent);
+    }
+
     public boolean addParent(Parent parent) {
         if (!parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
             return false;
         }
-        String enc = e.encryptionService().encode(parent.getPassword());
-        parent.setPassword(enc);
+        saveNewInfo(parent);
         System.out.println("Adding parent...");
         parentRepository.save(parent);
         return true;
@@ -36,8 +45,19 @@ public class ParentService {
         }
         String encryptedPass = parentRepository.findByEmail(parent.getEmail()).get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
+            System.out.println("Logging in parent...");
             return 0;
         }
         return 1;
     }
+
+    public boolean updateInfo(Parent parent) {
+        if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) return false;
+        int id = parentRepository.findByEmail(parent.getEmail()).get(0).getId();
+        parent.setId(id);
+        saveNewInfo(parent);
+        System.out.println("Updating parent info...");
+        return true;
+    }
+
 }
