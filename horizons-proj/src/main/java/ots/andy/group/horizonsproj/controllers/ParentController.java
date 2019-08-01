@@ -32,35 +32,27 @@ class ParentController {
         return repository.findAll();
     }
 
-    @PostMapping(path = "/parent/register")
+    @PostMapping(path = "/parent")
     public ResponseEntity createParent(@RequestBody Parent parent){
-        if (parentService.addParent(parent)) {
-            return new ResponseEntity(parent, HttpStatus.OK); //status
-        }
-        else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
+        if (parentService.addParent(parent)) return new ResponseEntity(parent, HttpStatus.OK); //status
+        return new ResponseEntity( HttpStatus.CONFLICT);
     }
 
     @GetMapping(path="/parent/login")
     public ResponseEntity loginParent(@RequestBody Parent parent) {
-        int response = parentService.loginParent(parent);
-        if (response == 0) {
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        else if (response == 1) {
-            return new ResponseEntity("Password incorrect", HttpStatus.OK);
-        }
-        return new ResponseEntity("Email does not exist", HttpStatus.OK);
+        if(parentService.loginParent(parent)) return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
-    @GetMapping(path="/parent/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/parent", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Parent> getAllParents(){
         return parentService.getAllParents();
     }
 
-    @PostMapping(path="/parent/updateInfo")
+    @PutMapping(path="/parent")
     public ResponseEntity updateInfo(@RequestBody Parent parent) {
         if (parentService.updateInfo(parent)) return new ResponseEntity(HttpStatus.OK);
-        return new ResponseEntity("Cannot update info", HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
 }

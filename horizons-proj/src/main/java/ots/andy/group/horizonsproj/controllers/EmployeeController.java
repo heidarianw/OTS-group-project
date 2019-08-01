@@ -28,24 +28,17 @@ public class EmployeeController {
         return repository.findAll();
     }
 
-    @PostMapping(path="/employee/register")
+    @PostMapping(path="/employee")
     public ResponseEntity createEmployee(@RequestBody Employee employee){
-        if (employeeService.addEmployee(employee)) {
-            return new ResponseEntity(HttpStatus.OK); //status
-        }
-        else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
+        if (employeeService.addEmployee(employee)) return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
     @GetMapping(path="/employee/login")
     public ResponseEntity loginEmployee(@RequestBody Employee employee) {
-        int response = employeeService.loginEmployee(employee);
-        if (response == 0) {
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        else if (response == 1) {
-            return new ResponseEntity("Password incorrect", HttpStatus.OK);
-        }
-        return new ResponseEntity("Email does not exist", HttpStatus.OK);
+        if (employeeService.loginEmployee(employee)) return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
+
 
 }

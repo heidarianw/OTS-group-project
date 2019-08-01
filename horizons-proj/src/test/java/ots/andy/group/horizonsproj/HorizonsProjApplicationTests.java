@@ -63,11 +63,11 @@ public class HorizonsProjApplicationTests {
 			employeeService.addEmployee(e);
 		}
 		// Ensure employee can log in, and incorrect passwords and emails do not work
-		assertEquals(employeeService.loginEmployee(temp), 0);
+		assertTrue(employeeService.loginEmployee(temp));
 		temp.setPassword("notmypass");
-		assertEquals(employeeService.loginEmployee(temp), 1);
+		assertFalse(employeeService.loginEmployee(temp));
 		temp.setEmail("notarealemail");
-		assertEquals(employeeService.loginEmployee(temp), 2);
+		assertFalse(employeeService.loginEmployee(temp));
 		employeeRepository.deleteByEmail(e.getEmail());
 		assertTrue(employeeRepository.findByEmail(e.getEmail()).isEmpty());
 	}
@@ -86,11 +86,11 @@ public class HorizonsProjApplicationTests {
 		// Ensure updated account exists and can log in
 		assertTrue(!employeeRepository.findByFirst("SampleTestName").isEmpty());
 		temp.setPassword("password");
-		assertEquals(employeeService.loginEmployee(temp), 0);
+		assertTrue(employeeService.loginEmployee(temp));
 		temp.setPassword("notmypass");
-		assertEquals(employeeService.loginEmployee(temp), 1);
+		assertFalse(employeeService.loginEmployee(temp));
 		temp.setEmail("notarealemail");
-		assertEquals(employeeService.loginEmployee(temp), 2);
+		assertFalse(employeeService.loginEmployee(temp));
 		employeeRepository.deleteByEmail(e.getEmail());
 		assertTrue(employeeRepository.findByEmail(e.getEmail()).isEmpty());
 	}
@@ -117,13 +117,13 @@ public class HorizonsProjApplicationTests {
 			parentService.addParent(p);
 		}
 		// Ensure log in works
-		assertEquals(parentService.loginParent(temp), 0);
+		assertTrue(parentService.loginParent(temp));
 		temp.setPassword("notmypass");
 		// Ensure incorrect pass does not work
-		assertEquals(parentService.loginParent(temp), 1);
+		assertFalse(parentService.loginParent(temp));
 		temp.setEmail("notarealemail");
 		// Ensure incorrect email does not work
-		assertEquals(parentService.loginParent(temp), 2);
+		assertFalse(parentService.loginParent(temp));
 		parentRepository.deleteByEmail(p.getEmail());
 		assertTrue(parentRepository.findByEmail(p.getEmail()).isEmpty());
 	}
@@ -143,11 +143,11 @@ public class HorizonsProjApplicationTests {
 		assertTrue(!parentRepository.findByFirst("SampleTestName1").isEmpty());
 		// Ensure updated account can log in
 		temp.setPassword("password");
-		assertEquals(parentService.loginParent(temp), 0);
+		assertTrue(parentService.loginParent(temp));
 		temp.setPassword("notmypass");
-		assertEquals(parentService.loginParent(temp), 1);
+		assertFalse(parentService.loginParent(temp));
 		temp.setEmail("notarealemail");
-		assertEquals(parentService.loginParent(temp), 2);
+		assertFalse(parentService.loginParent(temp));
 		parentRepository.deleteByEmail(p.getEmail());
 		assertTrue(parentRepository.findByEmail(p.getEmail()).isEmpty());
 	}
@@ -158,6 +158,7 @@ public class HorizonsProjApplicationTests {
 		if (childRepository.findByFirst(c.getFirst()).isEmpty()) {
 			childService.addChild(c);
 		}
+		System.out.println("arrived");
 		//Ensure children can be added
 		assertTrue(!childRepository.findByFirst(c.getFirst()).isEmpty());
 		// Ensure that negative age does not go through

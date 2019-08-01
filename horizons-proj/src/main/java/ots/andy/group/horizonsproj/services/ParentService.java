@@ -39,16 +39,16 @@ public class ParentService {
         return parentRepository.findAll();
     }
 
-    public int loginParent(Parent parent) {
+    public boolean loginParent(Parent parent) {
         if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
-            return 2;
+            return false;
         }
         String encryptedPass = parentRepository.findByEmail(parent.getEmail()).get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
             System.out.println("Logging in parent...");
-            return 0;
+            return true;
         }
-        return 1;
+        return false;
     }
 
     public boolean updateInfo(Parent parent) {
