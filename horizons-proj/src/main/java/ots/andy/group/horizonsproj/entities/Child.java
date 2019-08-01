@@ -14,7 +14,6 @@ import java.util.Set;
 @Entity
 @Table(name="child")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(using = ChildSerializer.class)
 public class Child {
 
     @Id

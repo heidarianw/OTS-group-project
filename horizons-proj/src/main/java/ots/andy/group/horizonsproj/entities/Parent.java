@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import ots.andy.group.horizonsproj.serializers.ChildSerializer;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -43,6 +45,7 @@ public class Parent {
     }
 
     @ManyToMany(mappedBy = "parentSet")
+    @JsonSerialize(using = ChildSerializer.class)
     private Set<Child> childSet = new HashSet<>();
 
     public Set<Child> getChildren() {
