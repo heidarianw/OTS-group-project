@@ -14,12 +14,12 @@ public class Allergy {
     @Column(name = "allergy")
     private String allergy;
 
-    @ManyToMany(mappedBy = "allergySet",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Child> childSet = new HashSet<>();
+//    @ManyToMany(mappedBy = "allergySet",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Child> childSet = new HashSet<>();
 
-    public Set<Child> getChildren() {
-        return childSet;
-    }
+//    public Set<Child> getChildren() {
+//        return childSet;
+//    }
 
     public int getId() {
         return id;

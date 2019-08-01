@@ -1,5 +1,8 @@
 package ots.andy.group.horizonsproj.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +17,9 @@ public class Status {
     @Column(name = "status")
     private String status;
 
-    @OneToMany(targetEntity=Child.class, mappedBy="status",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Child> childSet = new HashSet<>();
+//    @OneToMany(targetEntity=Child.class, mappedBy="status",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private Set<Child> childSet = new HashSet<>();
 
     public int getId() {
         return id;
@@ -33,9 +37,9 @@ public class Status {
         this.status = status;
     }
 
-    public Set<Child> getChildren() {
-        return childSet;
-    }
+//    public Set<Child> getChildren() {
+//        return childSet;
+//    }
 
     public Status(String status) {
         this.status = status;

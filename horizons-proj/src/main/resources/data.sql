@@ -35,3 +35,6 @@ insert into personality values
 	(default, 'Sensitive'),
 	(default, 'Determined'),
 	(default, 'Serious');
+
+insert into parent values
+    (default, 'Parent', 'One', 'parent1@gmail.com', crypt('password', gen_salt('bf')), '7067691148');
