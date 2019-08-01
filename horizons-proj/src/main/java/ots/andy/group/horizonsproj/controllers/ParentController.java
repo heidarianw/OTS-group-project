@@ -51,9 +51,4 @@ class ParentController {
         return new ResponseEntity("Email does not exist", HttpStatus.OK);
     }
 
-    @GetMapping(path="/parent/all/{var}")
-    public String getAllParents(){
-        return parentService.getAllParents();
-    }
-
 }

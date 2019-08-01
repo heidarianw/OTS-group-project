@@ -24,10 +24,6 @@ public class ParentService {
         return true;
     }
 
-    public String getAllParents(){
-        return parentRepository.findAll().toString();
-    }
-
     public int loginParent(Parent parent) {
         if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
             return 2;

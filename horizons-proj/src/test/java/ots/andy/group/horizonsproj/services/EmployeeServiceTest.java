@@ -1,16 +1,12 @@
 package ots.andy.group.horizonsproj.services;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import ots.andy.group.horizonsproj.entities.Employee;
-import ots.andy.group.horizonsproj.repositories.EmployeeRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeServiceTest {
 
-    @Autowired
-    EmployeeService employeeService;
     Employee e = new Employee("First", "Last", "Email", "password");
 
     @Test
