@@ -14,8 +14,8 @@ public class Daycare {
     @Column(name = "daycare")
     private String daycare;
 
-    @OneToMany(targetEntity=Child.class, mappedBy="daycare",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Child> childSet = new HashSet<>();
+//    @OneToMany(targetEntity=Child.class, mappedBy="daycare",cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Child> childSet = new HashSet<>();
 
     public int getId() {
         return id;
@@ -33,9 +33,9 @@ public class Daycare {
         this.daycare = daycare;
     }
 
-    public Set<Child> getChildren() {
-        return childSet;
-    }
+//    public Set<Child> getChildren() {
+//        return childSet;
+//    }
 
     public Daycare(String daycare) {
         this.daycare = daycare;

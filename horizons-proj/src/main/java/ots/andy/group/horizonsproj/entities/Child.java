@@ -70,9 +70,9 @@ public class Child {
     @JsonIgnore
     private Set<Parent> parentSet = new HashSet<>();
 
-    @ManyToOne(optional = true)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "personalityid")
-    private Personality personality;
+    private Personality personality = new Personality();
 
     @ManyToOne()
     @JoinColumn(name = "daycareid")
@@ -144,9 +144,9 @@ public class Child {
     }
 
     public void setDaycare(Daycare daycare) {
-        daycare.getChildren().remove(this);
+      //  daycare.getChildren().remove(this);
         this.daycare = daycare;
-        daycare.getChildren().add(this);
+       // daycare.getChildren().add(this);
     }
 
     public void setStatus(Status status) {
