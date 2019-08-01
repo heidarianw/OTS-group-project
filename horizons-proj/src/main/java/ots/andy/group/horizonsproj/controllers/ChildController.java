@@ -25,4 +25,7 @@ public class ChildController {
     public ResponseEntity addChild(@RequestBody Child child){
         return childService.addChild(child);
     }
+
+    @PostMapping("child/updateInfo")
+    public ResponseEntity updateInfo(@RequestBody Child child) { return childService.updateInfo(child); }
 }

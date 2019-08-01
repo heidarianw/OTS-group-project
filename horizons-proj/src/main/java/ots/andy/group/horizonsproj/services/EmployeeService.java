@@ -13,13 +13,18 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    public void saveNewInfo(Employee employee) {
+        String enc = e.encryptionService().encode(employee.getPassword());
+        employee.setPassword(enc);
+        employeeRepository.save(employee);
+    }
+
     public boolean addEmployee(Employee employee) {
         if (!employeeRepository.findByEmail(employee.getEmail()).isEmpty()) {
             return false;
         }
-        String enc = e.encryptionService().encode(employee.getPassword());
-        employee.setPassword(enc);
-        employeeRepository.save(employee);
+        saveNewInfo(employee);
+        System.out.println("Adding employee...");
         return true;
     }
 
@@ -29,8 +34,18 @@ public class EmployeeService {
         }
         String encryptedPass = employeeRepository.findByEmail(employee.getEmail()).get(0).getPassword();
         if (e.encryptionService().matches(employee.getPassword(), encryptedPass)) {
+            System.out.println("Logging in Employee...");
             return 0;
         }
         return 1;
+    }
+
+    public boolean updateInfo(Employee employee) {
+        if (employeeRepository.findByEmail(employee.getEmail()).isEmpty()) return false;
+        int id = employeeRepository.findByEmail(employee.getEmail()).get(0).getId();
+        employee.setId(id);
+        saveNewInfo(employee);
+        System.out.println("Updating Employee info...");
+        return true;
     }
 }
