@@ -30,7 +30,6 @@ public class ParentService {
             return false;
         }
         saveNewInfo(parent);
-        System.out.println("Adding parent...");
         parentRepository.save(parent);
         return true;
     }
@@ -45,7 +44,6 @@ public class ParentService {
         }
         String encryptedPass = parentRepository.findByEmail(parent.getEmail()).get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
-            System.out.println("Logging in parent...");
             return true;
         }
         return false;
@@ -56,7 +54,6 @@ public class ParentService {
         int id = parentRepository.findByEmail(parent.getEmail()).get(0).getId();
         parent.setId(id);
         saveNewInfo(parent);
-        System.out.println("Updating parent info...");
         return true;
     }
 
