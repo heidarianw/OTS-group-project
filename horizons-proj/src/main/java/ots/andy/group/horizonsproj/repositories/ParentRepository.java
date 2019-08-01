@@ -12,5 +12,7 @@ public interface ParentRepository extends JpaRepository<Parent, Integer> {
 
     List<Parent> findByEmail(String email);
 
+    void deleteByEmail(String email);
 
+    List<Parent> findByFirst(String first);
 }
