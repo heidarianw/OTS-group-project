@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import ots.andy.group.horizonsproj.serializers.ChildSerializer;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name="child")
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize(using = ChildSerializer.class)
 public class Child {
 
     @Id
@@ -67,12 +69,11 @@ public class Child {
     @JoinTable(name = "parentmap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "pid"))
-    @JsonIgnore
     private Set<Parent> parentSet = new HashSet<>();
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "personalityid")
-    private Personality personality = new Personality();
+    private Personality personality;
 
     @ManyToOne()
     @JoinColumn(name = "daycareid")
@@ -80,6 +81,7 @@ public class Child {
 
     @ManyToOne()
     @JoinColumn(name = "statusid")
+    @JsonIgnoreProperties("children")
     private Status status;
 
     public Child() { }
@@ -113,12 +115,12 @@ public class Child {
 
     public void addAllergy(Allergy allergy) {
         allergySet.add(allergy);
-        allergy.getChildren().add(this);
+       // allergy.getChildren().add(this);
     }
 
     public void removeAllergy(Allergy allergy) {
         allergySet.remove(allergy);
-        allergy.getChildren().remove(this);
+       // allergy.getChildren().remove(this);
     }
 
     public void addAllergies(List<Allergy> allergyList){
