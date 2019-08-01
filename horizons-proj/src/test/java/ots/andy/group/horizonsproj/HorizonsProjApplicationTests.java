@@ -187,5 +187,4 @@ public class HorizonsProjApplicationTests {
 		assertTrue(childRepository.findByFirst(toUpdate.getFirst()).isEmpty());
 	}
 
-
 }
