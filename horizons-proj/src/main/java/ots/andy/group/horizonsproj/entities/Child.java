@@ -1,10 +1,7 @@
 package ots.andy.group.horizonsproj.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import ots.andy.group.horizonsproj.serializers.ChildSerializer;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -14,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name="child")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(using = ChildSerializer.class)
 public class Child {
 
     @Id
@@ -66,6 +62,7 @@ public class Child {
     @ManyToMany(cascade = {
             CascadeType.PERSIST
     },fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinTable(name = "parentmap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "pid"))
