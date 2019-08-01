@@ -1,5 +1,10 @@
 package ots.andy.group.horizonsproj.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="child")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Child {
 
     @Id
@@ -52,6 +58,7 @@ public class Child {
     @JoinTable(name = "allergymap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "aid"))
+    @JsonIgnoreProperties("children")
     private Set<Allergy> allergySet = new HashSet<>();
 
     @ManyToMany(cascade = {
@@ -60,9 +67,10 @@ public class Child {
     @JoinTable(name = "parentmap",
             joinColumns = @JoinColumn(name = "cid"),
             inverseJoinColumns = @JoinColumn(name = "pid"))
+    @JsonIgnore
     private Set<Parent> parentSet = new HashSet<>();
 
-    @ManyToOne()
+    @ManyToOne(optional = true)
     @JoinColumn(name = "personalityid")
     private Personality personality;
 
@@ -74,9 +82,7 @@ public class Child {
     @JoinColumn(name = "statusid")
     private Status status;
 
-    public Child() {
-
-    }
+    public Child() { }
 
     public Child(String first, String last, int age, boolean sunday, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, String photo) {
         this.first = first;
@@ -119,9 +125,9 @@ public class Child {
     }
 
     public void setPersonality(Personality personality) {
-        personality.getChildren().remove(this);
+//        personality.getChildren().remove(this);
         this.personality = personality;
-        personality.getChildren().add(this);
+//        personality.getChildren().add(this);
     }
 
     public void setDaycare(Daycare daycare) {

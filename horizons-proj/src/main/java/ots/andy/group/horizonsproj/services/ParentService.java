@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
 
+import java.util.List;
+
 @Service
 public class ParentService {
 
@@ -24,8 +26,8 @@ public class ParentService {
         return true;
     }
 
-    public String getAllParents(){
-        return parentRepository.findAll().toString();
+    public List<Parent> getAllParents(){
+        return parentRepository.findAll();
     }
 
     public int loginParent(Parent parent) {

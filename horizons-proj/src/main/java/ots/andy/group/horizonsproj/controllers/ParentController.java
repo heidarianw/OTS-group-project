@@ -2,11 +2,9 @@ package ots.andy.group.horizonsproj.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
 import ots.andy.group.horizonsproj.services.EncryptionService;
@@ -15,6 +13,7 @@ import ots.andy.group.horizonsproj.services.ParentService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 class ParentController {
 
     @Autowired
@@ -34,7 +33,7 @@ class ParentController {
     @PostMapping(path = "/parent/register")
     public ResponseEntity createParent(@RequestBody Parent parent){
         if (parentService.addParent(parent)) {
-            return new ResponseEntity(HttpStatus.OK); //status
+            return new ResponseEntity(parent, HttpStatus.OK); //status
         }
         else { return new ResponseEntity("Email already in use", HttpStatus.OK); }
     }
@@ -51,8 +50,9 @@ class ParentController {
         return new ResponseEntity("Email does not exist", HttpStatus.OK);
     }
 
-    @GetMapping(path="/parent/all/{var}")
-    public String getAllParents(){
+
+    @GetMapping(path="/parent/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Parent> getAllParents(){
         return parentService.getAllParents();
     }
 

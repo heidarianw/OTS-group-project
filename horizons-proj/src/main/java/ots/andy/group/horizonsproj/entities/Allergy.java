@@ -1,5 +1,4 @@
 package ots.andy.group.horizonsproj.entities;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
