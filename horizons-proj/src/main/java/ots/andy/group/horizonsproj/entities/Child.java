@@ -150,9 +150,9 @@ public class Child {
     }
 
     public void setStatus(Status status) {
-        status.getChildren().remove(this);
+       // status.getChildren().remove(this);
         this.status = status;
-        status.getChildren().add(this);
+       // status.getChildren().add(this);
     }
     
     public Set<Allergy> getAllergySet() {
@@ -259,16 +259,16 @@ public class Child {
         this.photo = photo;
     }
 
-    public String getStatus() {
-        return status.getStatus();
+    public Status getStatus() {
+        return status;
     }
 
-    public String getDaycare() {
-        return daycare.getDaycare();
+    public Daycare getDaycare() {
+        return daycare;
     }
 
-    public String getPersonality() {
-        return personality.getPersonality();
+    public Personality getPersonality() {
+        return personality;
     }
 
     @Override
