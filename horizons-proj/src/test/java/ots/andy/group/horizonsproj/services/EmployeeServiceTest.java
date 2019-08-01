@@ -40,15 +40,4 @@ class EmployeeServiceTest {
         assertTrue(encryptionService.encryptionService().matches(e.getPassword(), enc));
     }
 
-//    @Test
-//    void addEmployee() {
-//        assertTrue(employeeService.addEmployee(e));
-//        assertFalse(employeeService.addEmployee(e));
-//
-//
-//    }
-
-    @Test
-    void loginEmployee() {
-    }
 }
