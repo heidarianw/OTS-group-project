@@ -17,19 +17,17 @@ public class ChildService {
             childRepository.save(child);
             return new ResponseEntity(HttpStatus.OK);
         }
-        else {
-            return new ResponseEntity("Bad Child Info", HttpStatus.OK);
-        }
+        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
 
     // Must have id in the field!
     public ResponseEntity updateInfo(Child child) {
         if (childRepository.findById(child.getId()).isEmpty()) {
-            return new ResponseEntity("No such child exists", HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
         }
         if (child.getFirst() != null && child.getLast() != null && child.getAge() >= 0) {
             childRepository.save(child);
         }
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
 }

@@ -24,7 +24,6 @@ public class EmployeeService {
             return false;
         }
         saveNewInfo(employee);
-        System.out.println("Adding employee...");
         return true;
     }
 
@@ -34,7 +33,6 @@ public class EmployeeService {
         }
         String encryptedPass = employeeRepository.findByEmail(employee.getEmail()).get(0).getPassword();
         if (e.encryptionService().matches(employee.getPassword(), encryptedPass)) {
-            System.out.println("Logging in Employee...");
             return true;
         }
         return false;
@@ -45,7 +43,6 @@ public class EmployeeService {
         int id = employeeRepository.findByEmail(employee.getEmail()).get(0).getId();
         employee.setId(id);
         saveNewInfo(employee);
-        System.out.println("Updating Employee info...");
         return true;
     }
 }
