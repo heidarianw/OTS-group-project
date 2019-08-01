@@ -19,9 +19,7 @@ public class ChildSerializer extends StdSerializer<Child> {
     }
 
     @Override
-    public void serialize(Child child, JsonGenerator jgen, SerializerProvider provider)
-                throws IOException, JsonProcessingException {
-
+    public void serialize(Child child, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
         jgen.writeStartObject();
         jgen.writeNumberField("id", child.getId());
         jgen.writeStringField("first", child.getFirst());
