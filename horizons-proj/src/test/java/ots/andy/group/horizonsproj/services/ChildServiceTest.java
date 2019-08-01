@@ -2,6 +2,9 @@ package ots.andy.group.horizonsproj.services;
 
 import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import ots.andy.group.horizonsproj.entities.Child;
 
 import static org.junit.jupiter.api.Assertions.*;
