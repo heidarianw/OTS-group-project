@@ -101,19 +101,6 @@ public class Child {
         this.photo = photo;
     }
 
-    public Child(int id, String first, String last, int age) {
-        this.id = id;
-        this.first = first;
-        this.last = last;
-        this.age = age;
-    }
-
-    public Child(String first, String last, int age) {
-        this.first = first;
-        this.last = last;
-        this.age = age;
-    }
-
     public void addAllergy(Allergy allergy) {
         allergySet.add(allergy);
        // allergy.getChildren().add(this);
