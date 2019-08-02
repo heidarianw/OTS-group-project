@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: ./horizons-proj-0.0.1-SNAPSHOT.jar
+    destination: /var/www/html
+hooks:
+  - location: scripts/install_dependencies.sh
+        timeout: 300
+        runas: root
+      - location: scripts/start_server.sh
+        timeout: 300
+        runas: root
+    ApplicationStop:
+      - location: scripts/stop_server.sh
+        timeout: 300
+        runas: root

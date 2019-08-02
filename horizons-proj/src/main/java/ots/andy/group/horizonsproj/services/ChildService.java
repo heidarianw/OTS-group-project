@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
+import java.util.List;
+
 @Service
 public class ChildService {
     private final ChildRepository childRepository;
@@ -25,8 +27,12 @@ public class ChildService {
         return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    public ResponseEntity addChild(Child child){
+    public ResponseEntity addChild(Child child) {
         return verifyAndRespond(child);
+    }
+
+    public List<Child> getAllChildren() {
+        return childRepository.findAll();
     }
 
     // Must have id in the field!
@@ -37,3 +43,4 @@ public class ChildService {
         return verifyAndRespond(child);
     }
 }
+
