@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: horizons-proj/horizons-proj-1.0-SNAPSHOT.jar
+  - source: ./horizons-proj-1.0-SNAPSHOT.jar
     destination: /var/www/html
 hooks:
 
