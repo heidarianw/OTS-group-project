@@ -1,8 +1,6 @@
 package ots.andy.group.horizonsproj.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Employee;
 import ots.andy.group.horizonsproj.repositories.EmployeeRepository;
@@ -26,32 +24,32 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public ResponseEntity addEmployee(Employee employee) {
+    public boolean addEmployee(Employee employee) {
         if (!employeeRepository.findByEmail(employee.getEmail()).isEmpty()) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
+            return false;
         }
         saveNewInfo(employee);
-        return new ResponseEntity(HttpStatus.OK);
+        return true;
     }
 
-    public ResponseEntity loginEmployee(Employee employee) {
+    public boolean loginEmployee(Employee employee) {
         List<Employee> myList = employeeRepository.findByEmail(employee.getEmail());
         if (myList.isEmpty()) {
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            return false;
         }
         String encryptedPass = myList.get(0).getPassword();
         if (e.encryptionService().matches(employee.getPassword(), encryptedPass)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return true;
         }
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        return false;
     }
 
-    public ResponseEntity updateInfo(Employee employee) {
+    public boolean updateInfo(Employee employee) {
         List<Employee> myList = employeeRepository.findByEmail(employee.getEmail());
-        if (myList.isEmpty()) return new ResponseEntity(HttpStatus.CONFLICT);
+        if (myList.isEmpty()) return false;
         int id = myList.get(0).getId();
         employee.setId(id);
         saveNewInfo(employee);
-        return new ResponseEntity(HttpStatus.OK);
+        return true;
     }
 }

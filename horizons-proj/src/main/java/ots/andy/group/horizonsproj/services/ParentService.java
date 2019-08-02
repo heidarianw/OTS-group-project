@@ -1,8 +1,6 @@
 package ots.andy.group.horizonsproj.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
@@ -27,37 +25,37 @@ public class ParentService {
         parentRepository.save(parent);
     }
 
-    public ResponseEntity addParent(Parent parent) {
+    public boolean addParent(Parent parent) {
         if (!parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
-            return new ResponseEntity( HttpStatus.CONFLICT);
+            return false;
         }
         saveNewInfo(parent);
-        return new ResponseEntity(HttpStatus.OK);
+        return true;
     }
 
     public List<Parent> getAllParents(){
         return parentRepository.findAll();
     }
 
-    public ResponseEntity loginParent(Parent parent) {
+    public boolean loginParent(Parent parent) {
         List<Parent> myList = parentRepository.findByEmail(parent.getEmail());
         if (myList.isEmpty()) {
-            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+            return false;
         }
         String encryptedPass = myList.get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
-            return new ResponseEntity(HttpStatus.OK);
+            return true;
         }
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        return false;
     }
 
-    public ResponseEntity updateInfo(Parent parent) {
+    public boolean updateInfo(Parent parent) {
         List<Parent> myList = parentRepository.findByEmail(parent.getEmail());
-        if (myList.isEmpty()) return new ResponseEntity(HttpStatus.CONFLICT);
+        if (myList.isEmpty()) return false;
         int id = myList.get(0).getId();
         parent.setId(id);
         saveNewInfo(parent);
-        return new ResponseEntity(HttpStatus.OK);
+        return true;
     }
 
 }

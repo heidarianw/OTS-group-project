@@ -18,10 +18,6 @@ class ParentServiceTest {
     EncryptionService enc = new EncryptionService();
     Parent p = new Parent("First", "Last", "Email", "password", "1234");
     Parent p2 = new Parent("First", "Last", "Email", enc.encryptionService().encode("password"), "1234");
-    ResponseEntity OK = new ResponseEntity(HttpStatus.OK);
-    ResponseEntity NO = new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-    ResponseEntity CONFLICT = new ResponseEntity(HttpStatus.CONFLICT);
-    ResponseEntity UNAUTHORIZED = new ResponseEntity(HttpStatus.UNAUTHORIZED);
     List<Parent> listWithParent = new ArrayList<Parent>() {
         {
             add(p2);
@@ -70,59 +66,59 @@ class ParentServiceTest {
     @Test
     public void testRegisterParent() {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.addParent(p);
+        boolean response = service.addParent(p);
         verify(repository, times(1)).save(p);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testRegisterCollision() {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
-        ResponseEntity response = service.addParent(p);
+        boolean response = service.addParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response.equals(CONFLICT));
+        assertTrue(response == false);
     }
 
     @Test
     public void testUpdateInfoEmpty() {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.updateInfo(p);
+        boolean response = service.updateInfo(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response.equals(CONFLICT));
+        assertTrue(response == false);
     }
 
     @Test
     public void testUpdateInfo() {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
-        ResponseEntity response = service.updateInfo(p);
+        boolean response = service.updateInfo(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
         verify(repository, times(1)).save(p);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testLoginInvalidEmail() {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.loginParent(p);
+        boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response.equals(UNAUTHORIZED));
+        assertTrue(response == false);
     }
 
     @Test
     public void testLoginValid() {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
-        ResponseEntity response = service.loginParent(p);
+        boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response.equals(OK));
+        assertTrue(response == true );
     }
 
     @Test
     public void testLoginInvalidPass() {
         p.setPassword("NOTMYPASS");
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
-        ResponseEntity response = service.loginParent(p);
+        boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response.equals(UNAUTHORIZED));
+        assertTrue(response == false);
     }
 
 }

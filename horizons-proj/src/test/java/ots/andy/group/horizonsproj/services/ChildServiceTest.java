@@ -3,8 +3,6 @@ package ots.andy.group.horizonsproj.services;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
@@ -17,8 +15,6 @@ import static org.mockito.Mockito.*;
 class ChildServiceTest {
 
     Child c = new Child("william", "heidarian", 23, true, true, true, true, true, true, true, "photo");
-    ResponseEntity OK = new ResponseEntity(HttpStatus.OK);
-    ResponseEntity NO = new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     List<Child> listWithChild = new ArrayList<Child>() {
         {
             add(c);
@@ -78,55 +74,55 @@ class ChildServiceTest {
 
     @Test
     public void testAddChild() {
-        ResponseEntity response = service.addChild(c);
+        boolean response = service.addChild(c);
         verify(repository, times(1)).save(c);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testAddBadAge() {
         c.setAge(-1);
-        ResponseEntity response = service.addChild(c);
+        boolean response = service.addChild(c);
         verify(repository, times(0)).save(c);
-        assertTrue(response.equals(NO));
+        assertTrue(response == false);
         c.setAge(10);
     }
 
     @Test
     public void testAddNullFirst() {
         c.setFirst(null);
-        ResponseEntity response = service.addChild(c);
+        boolean response = service.addChild(c);
         verify(repository, times(0)).save(c);
-        assertTrue(response.equals(NO));
+        assertTrue(response == false);
         c.setFirst("test");
     }
 
     @Test
     public void testAddNullLast() {
         c.setLast(null);
-        ResponseEntity response = service.addChild(c);
+        boolean response = service.addChild(c);
         verify(repository, times(0)).save(c);
-        assertTrue(response.equals(NO));
+        assertTrue(response == false);
         c.setLast("last");
     }
 
     @Test
     public void testUpdateChild() {
         when(repository.findById(c.getId())).thenReturn(listWithChild);
-        ResponseEntity response = service.updateInfo(c);
+        boolean response = service.updateInfo(c);
         verify(repository, times(1)).findById(c.getId());
         verify(repository, times(1)).save(c);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testUpdateChildBadAge() {
         c.setAge(-1);
         when(repository.findById(c.getId())).thenReturn(listWithChild);
-        ResponseEntity response = service.updateInfo(c);
+        boolean response = service.updateInfo(c);
         verify(repository, times(1)).findById(c.getId());
         verify(repository, times(0)).save(c);
-        assertTrue(response.equals(NO));
+        assertTrue(response == false);
         c.setAge(10);
     }
 }

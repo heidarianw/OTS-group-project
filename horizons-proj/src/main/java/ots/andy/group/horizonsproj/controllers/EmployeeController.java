@@ -2,6 +2,7 @@ package ots.andy.group.horizonsproj.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ots.andy.group.horizonsproj.entities.Employee;
@@ -26,18 +27,21 @@ public class EmployeeController {
     }
 
     @PostMapping(path="/employee")
-    public ResponseEntity createEmployee(@RequestBody Employee employee){
-        return employeeService.addEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+        if (employeeService.addEmployee(employee)) return new ResponseEntity(employee, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
     @GetMapping(path="/employee/login")
-    public ResponseEntity loginEmployee(@RequestBody Employee employee) {
-        return employeeService.loginEmployee(employee);
+    public ResponseEntity<Employee> loginEmployee(@RequestBody Employee employee) {
+        if (employeeService.loginEmployee(employee)) return new ResponseEntity(employee, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
     @PutMapping(path="employee")
-    public ResponseEntity updateInfo(@RequestBody Employee employee) {
-        return employeeService.updateInfo(employee);
+    public ResponseEntity<Employee> updateInfo(@RequestBody Employee employee) {
+        if (employeeService.updateInfo(employee)) return new ResponseEntity(employee, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
 

@@ -18,10 +18,6 @@ class EmployeeServiceTest {
     EncryptionService enc = new EncryptionService();
     Employee e = new Employee("First", "Last", "Email", "password");
     Employee e2 = new Employee("First", "Last", "Email", enc.encryptionService().encode("password"));
-    ResponseEntity OK = new ResponseEntity(HttpStatus.OK);
-    ResponseEntity NO = new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
-    ResponseEntity CONFLICT = new ResponseEntity(HttpStatus.CONFLICT);
-    ResponseEntity UNAUTHORIZED = new ResponseEntity(HttpStatus.UNAUTHORIZED);
     List<Employee> listWithEmployee = new ArrayList<Employee>() {
         {
             add(e2);
@@ -68,58 +64,58 @@ class EmployeeServiceTest {
     @Test
     public void testRegisterEmployee() {
         when(repository.findByEmail(e.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.addEmployee(e);
+        boolean response = service.addEmployee(e);
         verify(repository, times(1)).save(e);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testRegisterCollision() {
         when(repository.findByEmail(e.getEmail())).thenReturn(listWithEmployee);
-        ResponseEntity response = service.addEmployee(e);
+        boolean response = service.addEmployee(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response.equals(CONFLICT));
+        assertTrue(response == false);
     }
 
     @Test
     public void testUpdateInfoEmpty() {
         when(repository.findByEmail(e.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.updateInfo(e);
+        boolean response = service.updateInfo(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response.equals(CONFLICT));
+        assertTrue(response == false);
     }
 
     @Test
     public void testUpdateInfo() {
         when(repository.findByEmail(e.getEmail())).thenReturn(listWithEmployee);
-        ResponseEntity response = service.updateInfo(e);
+        boolean response = service.updateInfo(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
         verify(repository, times(1)).save(e);
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testLoginInvalidEmail() {
         when(repository.findByEmail(e.getEmail())).thenReturn(emptyList);
-        ResponseEntity response = service.loginEmployee(e);
+        boolean response = service.loginEmployee(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response.equals(UNAUTHORIZED));
+        assertTrue(response == false);
     }
 
     @Test
     public void testLoginValid() {
         when(repository.findByEmail(e.getEmail())).thenReturn(listWithEmployee);
-        ResponseEntity response = service.loginEmployee(e);
+        boolean response = service.loginEmployee(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response.equals(OK));
+        assertTrue(response == true);
     }
 
     @Test
     public void testLoginInvalidPass() {
         e.setPassword("NOTMYPASS");
         when(repository.findByEmail(e.getEmail())).thenReturn(listWithEmployee);
-        ResponseEntity response = service.loginEmployee(e);
+        boolean response = service.loginEmployee(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response.equals(UNAUTHORIZED));
+        assertTrue(response == false);
     }
 }

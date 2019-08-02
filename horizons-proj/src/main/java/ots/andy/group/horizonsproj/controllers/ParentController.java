@@ -1,6 +1,7 @@
 package ots.andy.group.horizonsproj.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,15 @@ class ParentController {
     }
 
     @PostMapping(path = "/parent")
-    public ResponseEntity createParent(@RequestBody Parent parent){
-        return parentService.addParent(parent);
+    public ResponseEntity<Parent> createParent(@RequestBody Parent parent){
+        if (parentService.addParent(parent)) return new ResponseEntity(parent, HttpStatus.OK);
+        return new ResponseEntity( HttpStatus.CONFLICT);
     }
 
     @GetMapping(path="/parent/login")
-    public ResponseEntity loginParent(@RequestBody Parent parent) {
-        return parentService.loginParent(parent);
+    public ResponseEntity<Parent> loginParent(@RequestBody Parent parent) {
+        if (parentService.loginParent(parent)) return new ResponseEntity(parent, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
     @GetMapping(path="/parent", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,8 +47,9 @@ class ParentController {
     }
 
     @PutMapping(path="/parent")
-    public ResponseEntity updateInfo(@RequestBody Parent parent) {
-        return parentService.updateInfo(parent);
+    public ResponseEntity<Parent> updateInfo(@RequestBody Parent parent) {
+        if (parentService.updateInfo(parent)) return new ResponseEntity(parent, HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
 }
