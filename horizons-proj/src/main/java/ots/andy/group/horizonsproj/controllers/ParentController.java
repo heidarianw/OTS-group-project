@@ -1,15 +1,11 @@
 package ots.andy.group.horizonsproj.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
-import ots.andy.group.horizonsproj.services.EncryptionService;
 import ots.andy.group.horizonsproj.services.ParentService;
 
 import java.util.List;
@@ -34,14 +30,12 @@ class ParentController {
 
     @PostMapping(path = "/parent")
     public ResponseEntity createParent(@RequestBody Parent parent){
-        if (parentService.addParent(parent)) return new ResponseEntity(parent, HttpStatus.OK); //status
-        return new ResponseEntity( HttpStatus.CONFLICT);
+        return parentService.addParent(parent);
     }
 
     @GetMapping(path="/parent/login")
     public ResponseEntity loginParent(@RequestBody Parent parent) {
-        if(parentService.loginParent(parent)) return new ResponseEntity(HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        return parentService.loginParent(parent);
     }
 
     @GetMapping(path="/parent", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,8 +45,7 @@ class ParentController {
 
     @PutMapping(path="/parent")
     public ResponseEntity updateInfo(@RequestBody Parent parent) {
-        if (parentService.updateInfo(parent)) return new ResponseEntity(HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.CONFLICT);
+        return parentService.updateInfo(parent);
     }
 
 }

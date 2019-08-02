@@ -1,23 +1,25 @@
 package ots.andy.group.horizonsproj.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
 
 import java.util.List;
 
-import java.util.Iterator;
-import java.util.Set;
-
 @Service
 public class ParentService {
 
+    private final ParentRepository parentRepository;
     EncryptionService e = new EncryptionService();
 
     @Autowired
-    private ParentRepository parentRepository;
-
+    public ParentService(ParentRepository parentRepository)
+    {
+        this.parentRepository = parentRepository;
+    }
 
     public void saveNewInfo(Parent parent) {
         String enc = e.encryptionService().encode(parent.getPassword());
@@ -25,36 +27,37 @@ public class ParentService {
         parentRepository.save(parent);
     }
 
-    public boolean addParent(Parent parent) {
+    public ResponseEntity addParent(Parent parent) {
         if (!parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
-            return false;
+            return new ResponseEntity( HttpStatus.CONFLICT);
         }
         saveNewInfo(parent);
-        parentRepository.save(parent);
-        return true;
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     public List<Parent> getAllParents(){
         return parentRepository.findAll();
     }
 
-    public boolean loginParent(Parent parent) {
-        if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) {
-            return false;
+    public ResponseEntity loginParent(Parent parent) {
+        List<Parent> myList = parentRepository.findByEmail(parent.getEmail());
+        if (myList.isEmpty()) {
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
-        String encryptedPass = parentRepository.findByEmail(parent.getEmail()).get(0).getPassword();
+        String encryptedPass = myList.get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
-            return true;
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
-    public boolean updateInfo(Parent parent) {
-        if (parentRepository.findByEmail(parent.getEmail()).isEmpty()) return false;
-        int id = parentRepository.findByEmail(parent.getEmail()).get(0).getId();
+    public ResponseEntity updateInfo(Parent parent) {
+        List<Parent> myList = parentRepository.findByEmail(parent.getEmail());
+        if (myList.isEmpty()) return new ResponseEntity(HttpStatus.CONFLICT);
+        int id = myList.get(0).getId();
         parent.setId(id);
         saveNewInfo(parent);
-        return true;
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
