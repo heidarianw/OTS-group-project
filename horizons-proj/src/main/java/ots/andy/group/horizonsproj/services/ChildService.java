@@ -12,8 +12,13 @@ import java.util.List;
 
 @Service
 public class ChildService {
+    private final ChildRepository childRepository;
+
     @Autowired
-    private ChildRepository childRepository;
+    public ChildService(ChildRepository childRepository)
+    {
+        this.childRepository = childRepository;
+    }
 
     public ResponseEntity addChild(Child child){
         if(child.getFirst() != null && child.getLast() != null && child.getAge() >= 0){
