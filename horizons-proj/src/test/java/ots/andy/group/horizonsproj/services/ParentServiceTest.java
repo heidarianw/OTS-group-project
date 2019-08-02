@@ -1,14 +1,33 @@
 package ots.andy.group.horizonsproj.services;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import ots.andy.group.horizonsproj.entities.Parent;
+import ots.andy.group.horizonsproj.repositories.ParentRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ParentServiceTest {
-
+    EncryptionService enc = new EncryptionService();
     Parent p = new Parent("First", "Last", "Email", "password", "1234");
-
+    Parent p2 = new Parent("First", "Last", "Email", enc.encryptionService().encode("password"), "1234");
+    ResponseEntity OK = new ResponseEntity(HttpStatus.OK);
+    ResponseEntity NO = new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+    ResponseEntity CONFLICT = new ResponseEntity(HttpStatus.CONFLICT);
+    ResponseEntity UNAUTHORIZED = new ResponseEntity(HttpStatus.UNAUTHORIZED);
+    List<Parent> listWithParent = new ArrayList<Parent>() {
+        {
+            add(p2);
+        }
+    };
+    List<Parent> emptyList = new ArrayList<Parent>();
     @Test
     void getParentInfo() {
         assertTrue(p.getFirst().equals("First"));
@@ -34,9 +53,76 @@ class ParentServiceTest {
 
     @Test
     void encryptPass() {
-        EncryptionService encryptionService = new EncryptionService();
-        String enc = encryptionService.encryptionService().encode(p.getPassword());
-        assertTrue(encryptionService.encryptionService().matches(p.getPassword(), enc));
+        String encPass = enc.encryptionService().encode(p.getPassword());
+        assertTrue(enc.encryptionService().matches(p.getPassword(), encPass));
+    }
+
+    private ParentService service;
+
+    private ParentRepository repository = Mockito.mock(ParentRepository.class);
+
+    @BeforeEach
+    public void init()
+    {
+        service = new ParentService(repository);
+    }
+
+    @Test
+    public void testRegisterParent() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
+        ResponseEntity response = service.addParent(p);
+        verify(repository, times(1)).save(p);
+        assertTrue(response.equals(OK));
+    }
+
+    @Test
+    public void testRegisterCollision() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
+        ResponseEntity response = service.addParent(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        assertTrue(response.equals(CONFLICT));
+    }
+
+    @Test
+    public void testUpdateInfoEmpty() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
+        ResponseEntity response = service.updateInfo(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        assertTrue(response.equals(CONFLICT));
+    }
+
+    @Test
+    public void testUpdateInfo() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
+        ResponseEntity response = service.updateInfo(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        verify(repository, times(1)).save(p);
+        assertTrue(response.equals(OK));
+    }
+
+    @Test
+    public void testLoginInvalidEmail() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
+        ResponseEntity response = service.loginParent(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        assertTrue(response.equals(UNAUTHORIZED));
+    }
+
+    @Test
+    public void testLoginValid() {
+        when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
+        ResponseEntity response = service.loginParent(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        assertTrue(response.equals(OK));
+    }
+
+    @Test
+    public void testLoginInvalidPass() {
+        p.setPassword("NOTMYPASS");
+        when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
+        ResponseEntity response = service.loginParent(p);
+        verify(repository, times(1)).findByEmail(p.getEmail());
+        assertTrue(response.equals(UNAUTHORIZED));
     }
 
 }
