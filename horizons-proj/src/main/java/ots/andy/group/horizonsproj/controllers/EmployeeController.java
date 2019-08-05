@@ -12,6 +12,7 @@ import ots.andy.group.horizonsproj.services.EmployeeService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class EmployeeController {
 
     @Autowired

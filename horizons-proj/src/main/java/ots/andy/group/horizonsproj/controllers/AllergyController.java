@@ -13,6 +13,7 @@ import ots.andy.group.horizonsproj.services.AllergyService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class AllergyController {
 
     @Autowired

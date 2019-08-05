@@ -15,6 +15,7 @@ import ots.andy.group.horizonsproj.services.StatusService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class StatusController {
 
     @Autowired

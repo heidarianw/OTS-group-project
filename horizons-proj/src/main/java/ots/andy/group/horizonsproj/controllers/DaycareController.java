@@ -13,6 +13,7 @@ import ots.andy.group.horizonsproj.services.DaycareService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class DaycareController {
 
     @Autowired
