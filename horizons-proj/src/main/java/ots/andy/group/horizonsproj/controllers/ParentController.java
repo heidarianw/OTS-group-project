@@ -35,7 +35,7 @@ class ParentController {
         return new ResponseEntity( HttpStatus.CONFLICT);
     }
 
-    @GetMapping(path="/parent/login")
+    @PostMapping(path="/parent/login")
     public ResponseEntity<Parent> loginParent(@RequestBody Parent parent) {
         if (parentService.loginParent(parent)) return new ResponseEntity(parent, HttpStatus.OK);
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);

@@ -32,7 +32,7 @@ public class EmployeeController {
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
-    @GetMapping(path="/employee/login")
+    @PostMapping(path="/employee/login")
     public ResponseEntity<Employee> loginEmployee(@RequestBody Employee employee) {
         if (employeeService.loginEmployee(employee)) return new ResponseEntity(employee, HttpStatus.OK);
         return new ResponseEntity(HttpStatus.UNAUTHORIZED);
