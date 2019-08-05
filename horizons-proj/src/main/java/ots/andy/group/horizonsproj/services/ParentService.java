@@ -44,6 +44,10 @@ public class ParentService {
         }
         String encryptedPass = myList.get(0).getPassword();
         if (e.encryptionService().matches(parent.getPassword(), encryptedPass)) {
+            parent.setId(myList.get(0).getId());
+            parent.setFirst(myList.get(0).getFirst());
+            parent.setLast(myList.get(0).getLast());
+            parent.setPhone(myList.get(0).getPhone());
             return true;
         }
         return false;

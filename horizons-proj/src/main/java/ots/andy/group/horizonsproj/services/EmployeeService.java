@@ -39,6 +39,9 @@ public class EmployeeService {
         }
         String encryptedPass = myList.get(0).getPassword();
         if (e.encryptionService().matches(employee.getPassword(), encryptedPass)) {
+            employee.setId(myList.get(0).getId());
+            employee.setFirst(myList.get(0).getFirst());
+            employee.setLast(myList.get(0).getLast());
             return true;
         }
         return false;
