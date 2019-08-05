@@ -108,4 +108,8 @@ public class Parent {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+    public void setChildren(Set<Child> children) {
+        this.childSet = children;
+    }
 }

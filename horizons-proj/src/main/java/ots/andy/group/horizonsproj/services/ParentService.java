@@ -48,6 +48,7 @@ public class ParentService {
             parent.setFirst(myList.get(0).getFirst());
             parent.setLast(myList.get(0).getLast());
             parent.setPhone(myList.get(0).getPhone());
+            parent.setChildren(myList.get(0).getChildren());
             return true;
         }
         return false;
