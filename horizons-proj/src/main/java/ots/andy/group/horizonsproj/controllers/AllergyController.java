@@ -7,22 +7,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ots.andy.group.horizonsproj.entities.Parent;
-import ots.andy.group.horizonsproj.entities.Status;
-import ots.andy.group.horizonsproj.repositories.StatusRepository;
-import ots.andy.group.horizonsproj.services.StatusService;
+import ots.andy.group.horizonsproj.entities.Allergy;
+import ots.andy.group.horizonsproj.services.AllergyService;
 
 import java.util.List;
 
 @RestController
-public class StatusController {
+public class AllergyController {
 
     @Autowired
-    private StatusService service;
+    private AllergyService service;
 
-    @GetMapping(path="/status", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Status> getAllStatus(){
-        List<Status> response = service.getAllStatus();
+    @GetMapping(path="/allergy", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Allergy> getAllAllergy(){
+        List<Allergy> response = service.getAllAllergy();
         return new ResponseEntity(response, HttpStatus.OK);
     }
 }
