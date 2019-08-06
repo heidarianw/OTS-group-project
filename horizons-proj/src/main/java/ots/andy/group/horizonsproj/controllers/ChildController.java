@@ -29,8 +29,11 @@ public class ChildController {
 
     @PostMapping("/child")
     public ResponseEntity<Child> addChild(@RequestBody Child child) {
-        if (childService.addChild(child)) return new ResponseEntity(child, HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        try {
+            return new ResponseEntity(childService.addChild(child), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @PutMapping("/child")

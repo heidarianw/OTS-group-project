@@ -20,14 +20,15 @@ public class ChildService {
 
     public boolean verifyAndRespond(Child child) {
         if(child.getFirst() != null && child.getLast() != null && child.getAge() >= 0){
-            childRepository.save(child);
             return true;
         }
         return false;
     }
 
-    public boolean addChild(Child child) {
-        return verifyAndRespond(child);
+    public Child addChild(Child child) throws Exception{
+        if (verifyAndRespond(child)) {
+            return childRepository.save(child);
+        } else throw new Exception("Child not saved");
     }
 
     public List<Child> getAllChildren() {

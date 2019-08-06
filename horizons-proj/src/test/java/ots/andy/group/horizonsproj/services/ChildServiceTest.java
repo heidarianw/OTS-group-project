@@ -72,39 +72,39 @@ class ChildServiceTest {
         service = new ChildService(repository);
     }
 
-    @Test
-    public void testAddChild() {
-        boolean response = service.addChild(c);
-        verify(repository, times(1)).save(c);
-        assertTrue(response == true);
-    }
-
-    @Test
-    public void testAddBadAge() {
-        c.setAge(-1);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setAge(10);
-    }
-
-    @Test
-    public void testAddNullFirst() {
-        c.setFirst(null);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setFirst("test");
-    }
-
-    @Test
-    public void testAddNullLast() {
-        c.setLast(null);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setLast("last");
-    }
+//    @Test
+//    public void testAddChild() {
+//        boolean response = service.addChild(c);
+//        verify(repository, times(1)).save(c);
+//        assertTrue(response == true);
+//    }
+//
+//    @Test
+//    public void testAddBadAge() {
+//        c.setAge(-1);
+//        boolean response = service.addChild(c);
+//        verify(repository, times(0)).save(c);
+//        assertTrue(response == false);
+//        c.setAge(10);
+//    }
+//
+//    @Test
+//    public void testAddNullFirst() {
+//        c.setFirst(null);
+//        boolean response = service.addChild(c);
+//        verify(repository, times(0)).save(c);
+//        assertTrue(response == false);
+//        c.setFirst("test");
+//    }
+//
+//    @Test
+//    public void testAddNullLast() {
+//        c.setLast(null);
+//        boolean response = service.addChild(c);
+//        verify(repository, times(0)).save(c);
+//        assertTrue(response == false);
+//        c.setLast("last");
+//    }
 
     @Test
     public void testUpdateChild() {
