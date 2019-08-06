@@ -38,8 +38,11 @@ public class ChildController {
 
     @PutMapping("/child")
     public ResponseEntity<Child> updateInfo(@RequestBody Child child) {
-        if (childService.updateInfo(child)) return new ResponseEntity(child, HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        try {
+            return new ResponseEntity(childService.updateInfo(child), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @GetMapping("/child/{id}")
