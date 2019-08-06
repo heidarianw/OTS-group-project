@@ -16,6 +16,7 @@ import ots.andy.group.horizonsproj.services.ChildService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000")
 public class ChildController {
 
     @Autowired
