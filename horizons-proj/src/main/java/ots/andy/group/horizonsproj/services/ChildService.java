@@ -42,6 +42,13 @@ public class ChildService {
         return verifyAndRespond(child);
     }
 
+    public Child findById(int id) throws Exception{
+        List<Child> result = childRepository.findById(id);
+        if (!result.isEmpty()){
+            return result.get(0);
+        } else throw new Exception("Cannot find ID.");
+    }
+
     public List<Child> getSearchedChildren(String term){
         List<Child> completeList = new ArrayList<>();
         if(term.indexOf(" ") == -1){

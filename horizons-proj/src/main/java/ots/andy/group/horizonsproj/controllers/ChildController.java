@@ -38,4 +38,13 @@ public class ChildController {
         if (childService.updateInfo(child)) return new ResponseEntity(child, HttpStatus.OK);
         return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
     }
+
+    @GetMapping("/child/{id}")
+    public ResponseEntity<Child> searchChild(@PathVariable int id){
+        try {
+            return new ResponseEntity(childService.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
 }
