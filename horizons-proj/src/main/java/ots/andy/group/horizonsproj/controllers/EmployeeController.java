@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.entities.Employee;
 import ots.andy.group.horizonsproj.repositories.EmployeeRepository;
+import ots.andy.group.horizonsproj.services.ChildService;
 import ots.andy.group.horizonsproj.services.EmployeeService;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private ChildService childService;
 
     EmployeeController(EmployeeRepository repository) { this.repository = repository; }
 
@@ -45,5 +50,8 @@ public class EmployeeController {
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
-
+    @GetMapping(path="/employee/search/{term}")
+    public ResponseEntity<Child> searchChild(@PathVariable String term){
+        return new ResponseEntity(childService.getSearchedChildren(term),HttpStatus.OK);
+    }
 }
