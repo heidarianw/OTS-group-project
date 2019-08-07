@@ -1,10 +1,12 @@
 package ots.andy.group.horizonsproj.services;
 
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
+import ots.andy.group.horizonsproj.services.ChildService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +75,7 @@ class ChildServiceTest {
     }
 
     @Test
-    public void testAddChild() throws Exception {
+    public void AddChild() throws Exception {
         Child response = service.addChild(c);
         verify(repository, times(1)).save(c);
     }
