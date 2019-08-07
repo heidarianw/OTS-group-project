@@ -29,6 +29,7 @@ public class AmazonService {
     }
 
     public String upload(MultipartFile multipartFile) throws IOException {
+        // To run this locally, ensure that your system has the below two environmental variables
         AWSCredentials credentials = new BasicAWSCredentials(
                 System.getenv("AMAZON_ACCESS"),
         System.getenv("AMAZON_SECRET")
