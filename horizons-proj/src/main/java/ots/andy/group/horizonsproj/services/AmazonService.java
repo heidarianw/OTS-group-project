@@ -29,11 +29,10 @@ public class AmazonService {
         return convFile;
     }
 
-    Dotenv dotenv = Dotenv.load();
     public String upload(MultipartFile multipartFile) throws IOException {
         AWSCredentials credentials = new BasicAWSCredentials(
-                dotenv.get("AMAZON_ACCESS"),
-                dotenv.get("AMAZON_SECRET")
+                System.getenv("AMAZON_ACCESS"),
+        System.getenv("AMAZON_SECRET")
         );
         AmazonS3 s3client = AmazonS3ClientBuilder
                 .standard()
