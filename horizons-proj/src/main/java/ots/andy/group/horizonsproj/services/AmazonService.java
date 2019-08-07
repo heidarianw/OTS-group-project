@@ -13,7 +13,6 @@ import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.File;
 import java.io.IOException;
