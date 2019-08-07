@@ -10,6 +10,7 @@ import ots.andy.group.horizonsproj.repositories.ParentRepository;
 import ots.andy.group.horizonsproj.services.ParentService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -44,6 +45,15 @@ class ParentController {
     @GetMapping(path="/parent", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Parent> getAllParents(){
         return parentService.getAllParents();
+    }
+
+
+    @GetMapping(path="/parent/{childID}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Parent> getParentsOfChild(@PathVariable int childID){
+        Set<Parent> result = parentService.getParentsOfChild(childID);
+        if (!result.isEmpty()){
+            return new ResponseEntity(result, HttpStatus.OK);
+        } else return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
     @PutMapping(path="/parent")

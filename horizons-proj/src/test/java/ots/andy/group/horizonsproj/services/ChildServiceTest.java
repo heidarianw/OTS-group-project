@@ -73,56 +73,80 @@ class ChildServiceTest {
     }
 
     @Test
-    public void testAddChild() {
-        boolean response = service.addChild(c);
+    public void testAddChild() throws Exception {
+        Child response = service.addChild(c);
         verify(repository, times(1)).save(c);
-        assertTrue(response == true);
     }
 
     @Test
-    public void testAddBadAge() {
-        c.setAge(-1);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setAge(10);
+    public void testAddBadAge() throws Exception {
+        boolean ex = false;
+        try {
+            c.setAge(-1);
+            Child response = service.addChild(c);
+            verify(repository, times(0)).save(c);
+            c.setAge(10);
+        } catch(Exception e) {
+            ex = true;
+        }
+        assertTrue(ex);
     }
 
     @Test
-    public void testAddNullFirst() {
-        c.setFirst(null);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setFirst("test");
+    public void testAddNullFirst() throws Exception {
+        boolean ex = false;
+        try {
+            c.setFirst(null);
+            Child response = service.addChild(c);
+            verify(repository, times(0)).save(c);
+            c.setFirst("test");
+        } catch(Exception e) {
+            ex = true;
+        }
+        assertTrue(ex);
     }
 
     @Test
-    public void testAddNullLast() {
-        c.setLast(null);
-        boolean response = service.addChild(c);
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setLast("last");
+    public void testAddNullLast() throws Exception {
+        boolean ex = false;
+        try {
+            c.setLast(null);
+            Child response = service.addChild(c);
+            verify(repository, times(0)).save(c);
+            c.setLast("last");
+        } catch(Exception e) {
+            ex = true;
+        }
+        assertTrue(ex);
     }
 
     @Test
-    public void testUpdateChild() {
-        when(repository.findById(c.getId())).thenReturn(listWithChild);
-        boolean response = service.updateInfo(c);
-        verify(repository, times(1)).findById(c.getId());
-        verify(repository, times(1)).save(c);
-        assertTrue(response == true);
+    public void testUpdateChild() throws Exception {
+        boolean ex = false;
+        try {
+            when(repository.findById(c.getId())).thenReturn(listWithChild);
+            Child response = service.updateInfo(c);
+            verify(repository, times(1)).findById(c.getId());
+            verify(repository, times(1)).save(c);
+        } catch(Exception e) {
+
+        }
+        assertFalse(ex);
     }
 
     @Test
-    public void testUpdateChildBadAge() {
-        c.setAge(-1);
-        when(repository.findById(c.getId())).thenReturn(listWithChild);
-        boolean response = service.updateInfo(c);
-        verify(repository, times(1)).findById(c.getId());
-        verify(repository, times(0)).save(c);
-        assertTrue(response == false);
-        c.setAge(10);
+    public void testUpdateChildBadAge() throws Exception {
+        boolean ex = false;
+        try {
+            c.setAge(-1);
+            when(repository.findById(c.getId())).thenReturn(listWithChild);
+            Child response = service.updateInfo(c);
+            verify(repository, times(1)).findById(c.getId());
+            verify(repository, times(0)).save(c);
+            c.setAge(10);
+        } catch(Exception e) {
+            ex = true;
+        }
+        assertTrue(ex);
     }
 }

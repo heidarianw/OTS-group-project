@@ -29,13 +29,28 @@ public class ChildController {
 
     @PostMapping("/child")
     public ResponseEntity<Child> addChild(@RequestBody Child child) {
-        if (childService.addChild(child)) return new ResponseEntity(child, HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        try {
+            return new ResponseEntity(childService.addChild(child), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @PutMapping("/child")
     public ResponseEntity<Child> updateInfo(@RequestBody Child child) {
-        if (childService.updateInfo(child)) return new ResponseEntity(child, HttpStatus.OK);
-        return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        try {
+            return new ResponseEntity(childService.updateInfo(child), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
+    }
+
+    @GetMapping("/child/{id}")
+    public ResponseEntity<Child> searchChild(@PathVariable int id){
+        try {
+            return new ResponseEntity(childService.findById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }

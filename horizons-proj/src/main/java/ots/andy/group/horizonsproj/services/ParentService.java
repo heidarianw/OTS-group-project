@@ -2,15 +2,22 @@ package ots.andy.group.horizonsproj.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.entities.Parent;
+import ots.andy.group.horizonsproj.repositories.ChildRepository;
 import ots.andy.group.horizonsproj.repositories.ParentRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ParentService {
 
     private final ParentRepository parentRepository;
+
+    @Autowired
+    private ChildRepository childRepository;
+
     EncryptionService e = new EncryptionService();
 
     @Autowired
@@ -35,6 +42,10 @@ public class ParentService {
 
     public List<Parent> getAllParents(){
         return parentRepository.findAll();
+    }
+
+    public Set<Parent> getParentsOfChild(int id){
+        return childRepository.findById(id).get(0).getParentSet();
     }
 
     public boolean loginParent(Parent parent) {
