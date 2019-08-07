@@ -13,8 +13,8 @@ import java.util.List;
 public interface ChildRepository extends JpaRepository<Child, Integer> {
 
 
-    List<Child> findByFirst(String first);
-    List<Child> findByLast(String last);
+    List<Child> findByFirstIgnoreCase(String first);
+    List<Child> findByLastIgnoreCase(String last);
     List<Child> findById(int id);
 
     void deleteByFirst(String first);
