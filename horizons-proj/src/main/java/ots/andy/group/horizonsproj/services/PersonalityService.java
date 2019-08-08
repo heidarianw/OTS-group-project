@@ -11,9 +11,13 @@ import java.util.List;
 
 @Service
 public class PersonalityService {
+    private final PersonalityRepository repo;
 
     @Autowired
-    private PersonalityRepository repo;
+    public PersonalityService(PersonalityRepository personalityRepository)
+    {
+        this.repo = personalityRepository;
+    }
 
     public List<Personality> getAllPersonality(){
         return repo.findAll();

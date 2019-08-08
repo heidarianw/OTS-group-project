@@ -9,9 +9,13 @@ import java.util.List;
 
 @Service
 public class StatusService {
+    private final StatusRepository repo;
 
     @Autowired
-    private StatusRepository repo;
+    public StatusService(StatusRepository statusRepository)
+    {
+        this.repo = statusRepository;
+    }
 
     public List<Status> getAllStatus(){
         return repo.findAll();

@@ -40,28 +40,29 @@ class ChildServiceTest {
 
     @Test
     void getAndSetChildInfo() {
-        c.setFirst("will");
-        c.setLast("hei");
-        c.setAge(24);
-        c.setSunday(false);
-        c.setMonday(false);
-        c.setTuesday(false);
-        c.setWednesday(false);
-        c.setThursday(false);
-        c.setFriday(false);
-        c.setSaturday(false);
-        c.setPhoto("photo2");
-        assertTrue(c.getFirst().equals("will"));
-        assertTrue(c.getLast().equals("hei"));
-        assertTrue(c.getAge() == 24);
-        assertTrue(c.isSunday() == false);
-        assertTrue(c.isSaturday() == false);
-        assertTrue(c.isMonday() == false);
-        assertTrue(c.isTuesday() == false);
-        assertTrue(c.isWednesday() == false);
-        assertTrue(c.isThursday() == false);
-        assertTrue(c.isFriday() == false);
-        assertTrue(c.getPhoto().equals("photo2"));
+        Child temp = new Child();
+        temp.setFirst("will");
+        temp.setLast("hei");
+        temp.setAge(24);
+        temp.setSunday(false);
+        temp.setMonday(false);
+        temp.setTuesday(false);
+        temp.setWednesday(false);
+        temp.setThursday(false);
+        temp.setFriday(false);
+        temp.setSaturday(false);
+        temp.setPhoto("photo2");
+        assertTrue(temp.getFirst().equals("will"));
+        assertTrue(temp.getLast().equals("hei"));
+        assertTrue(temp.getAge() == 24);
+        assertTrue(temp.isSunday() == false);
+        assertTrue(temp.isSaturday() == false);
+        assertTrue(temp.isMonday() == false);
+        assertTrue(temp.isTuesday() == false);
+        assertTrue(temp.isWednesday() == false);
+        assertTrue(temp.isThursday() == false);
+        assertTrue(temp.isFriday() == false);
+        assertTrue(temp.getPhoto().equals("photo2"));
     }
 
     private ChildService service;

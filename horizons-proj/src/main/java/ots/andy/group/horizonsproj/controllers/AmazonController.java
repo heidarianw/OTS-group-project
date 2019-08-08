@@ -21,7 +21,12 @@ public class AmazonController {
 
     @PostMapping("/upload")
     public ResponseEntity<String> upload(@RequestPart(value = "file") MultipartFile multipartFile) throws IOException {
-        String url = amazonService.upload(multipartFile);
-        return new ResponseEntity(url, HttpStatus.OK);
+        try {
+            String url = amazonService.upload(multipartFile);
+            return new ResponseEntity(url, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+
     }
 }

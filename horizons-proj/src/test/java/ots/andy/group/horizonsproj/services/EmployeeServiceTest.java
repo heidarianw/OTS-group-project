@@ -66,7 +66,7 @@ class EmployeeServiceTest {
         when(repository.findByEmail(e.getEmail())).thenReturn(emptyList);
         boolean response = service.addEmployee(e);
         verify(repository, times(1)).save(e);
-        assertTrue(response == true);
+        assertTrue(response);
     }
 
     @Test
@@ -74,7 +74,7 @@ class EmployeeServiceTest {
         when(repository.findByEmail(e.getEmail())).thenReturn(listWithEmployee);
         boolean response = service.addEmployee(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
     @Test
@@ -82,7 +82,7 @@ class EmployeeServiceTest {
         when(repository.findByEmail(e.getEmail())).thenReturn(emptyList);
         boolean response = service.updateInfo(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
     @Test
@@ -91,7 +91,7 @@ class EmployeeServiceTest {
         boolean response = service.updateInfo(e);
         verify(repository, times(1)).findByEmail(e.getEmail());
         verify(repository, times(1)).save(e);
-        assertTrue(response == true);
+        assertTrue(response);
     }
 
     @Test

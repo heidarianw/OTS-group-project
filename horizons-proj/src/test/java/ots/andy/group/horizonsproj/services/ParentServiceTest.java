@@ -33,16 +33,17 @@ class ParentServiceTest {
 
     @Test
     void getAndSetParentInfo() {
-        p.setFirst("f");
-        p.setLast("l");
-        p.setEmail("e");
-        p.setPassword("p");
-        p.setPhone("1");
-        assertTrue(p.getFirst().equals("f"));
-        assertTrue(p.getLast().equals("l"));
-        assertTrue(p.getEmail().equals("e"));
-        assertTrue(p.getPassword().equals("p"));
-        assertTrue(p.getPhone().equals("1"));
+        Parent temp = new Parent();
+        temp.setFirst("f");
+        temp.setLast("l");
+        temp.setEmail("e");
+        temp.setPassword("p");
+        temp.setPhone("1");
+        assertTrue(temp.getFirst().equals("f"));
+        assertTrue(temp.getLast().equals("l"));
+        assertTrue(temp.getEmail().equals("e"));
+        assertTrue(temp.getPassword().equals("p"));
+        assertTrue(temp.getPhone().equals("1"));
     }
 
     @Test
@@ -66,7 +67,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
         boolean response = service.addParent(p);
         verify(repository, times(1)).save(p);
-        assertTrue(response == true);
+        assertTrue(response);
     }
 
     @Test
@@ -74,7 +75,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
         boolean response = service.addParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
     @Test
@@ -82,7 +83,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
         boolean response = service.updateInfo(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
     @Test
@@ -91,7 +92,7 @@ class ParentServiceTest {
         boolean response = service.updateInfo(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
         verify(repository, times(1)).save(p);
-        assertTrue(response == true);
+        assertTrue(response);
     }
 
     @Test
@@ -99,7 +100,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(emptyList);
         boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
     @Test
@@ -107,7 +108,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
         boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response == true );
+        assertTrue(response );
     }
 
     @Test
@@ -116,7 +117,7 @@ class ParentServiceTest {
         when(repository.findByEmail(p.getEmail())).thenReturn(listWithParent);
         boolean response = service.loginParent(p);
         verify(repository, times(1)).findByEmail(p.getEmail());
-        assertTrue(response == false);
+        assertFalse(response);
     }
 
 }

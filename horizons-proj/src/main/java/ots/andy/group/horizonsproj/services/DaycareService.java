@@ -9,9 +9,12 @@ import java.util.List;
 
 @Service
 public class DaycareService {
-
+    private final DaycareRepository repo;
     @Autowired
-    private DaycareRepository repo;
+    public DaycareService(DaycareRepository daycareRepository)
+    {
+        this.repo = daycareRepository;
+    }
 
     public List<Daycare> getAllDaycare(){
         return repo.findAll();
