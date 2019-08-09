@@ -17,13 +17,14 @@ import java.util.List;
 @CrossOrigin(origins= {"http://localhost:3000", "http://horizons-frontend-bucket-1.s3-website-us-west-1.amazonaws.com"})
 public class DaycareController {
 
-    private final DaycareService service;
+    private DaycareService service;
     @Autowired
     public DaycareController(DaycareService daycareService)
     {
         this.service = daycareService;
     }
 
+    DaycareController() {}
     @GetMapping(path="/daycare", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Daycare> getAllDaycare(){
         List<Daycare> response = service.getAllDaycare();

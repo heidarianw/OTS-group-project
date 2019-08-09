@@ -23,6 +23,7 @@ public class ChildController {
     @Autowired
     private ChildService childService;
 
+    ChildController() {}
     ChildController(ChildService service) {
         this.childService = service;
     }

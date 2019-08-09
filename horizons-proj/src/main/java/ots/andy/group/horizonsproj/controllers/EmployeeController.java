@@ -18,13 +18,15 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private final EmployeeRepository repository;
+    private EmployeeRepository repository;
 
     @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private ChildService childService;
+
+    EmployeeController() {}
 
     EmployeeController(EmployeeService service, EmployeeRepository repository) {
         this.repository = repository;

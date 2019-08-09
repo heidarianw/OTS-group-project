@@ -17,12 +17,13 @@ import java.util.List;
 @CrossOrigin(origins= {"http://localhost:3000", "http://horizons-frontend-bucket-1.s3-website-us-west-1.amazonaws.com"})
 public class AllergyController {
 
-    private final AllergyService service;
+    private AllergyService service;
     @Autowired
     public AllergyController(AllergyService allergyService)
     {
         this.service = allergyService;
     }
+    AllergyController() {}
 
     @GetMapping(path="/allergy", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Allergy> getAllAllergy(){

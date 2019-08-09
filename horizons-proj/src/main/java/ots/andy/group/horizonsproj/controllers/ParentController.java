@@ -17,10 +17,12 @@ import java.util.Set;
 class ParentController {
 
     @Autowired
-    private final ParentRepository repository;
+    private ParentRepository repository;
 
     @Autowired
     private ParentService parentService;
+
+    ParentController() {}
 
     ParentController(ParentRepository repository) {
         this.repository = repository;
