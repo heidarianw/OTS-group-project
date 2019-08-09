@@ -18,8 +18,12 @@ import java.util.List;
 @CrossOrigin(origins= {"http://localhost:3000", "http://horizons-frontend-bucket-1.s3-website-us-west-1.amazonaws.com"})
 public class StatusController {
 
+    private final StatusService service;
     @Autowired
-    private StatusService service;
+    public StatusController(StatusService statusService)
+    {
+        this.service = statusService;
+    }
 
     @GetMapping(path="/status", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Status> getAllStatus(){
