@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.repositories.ChildRepository;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,13 +56,13 @@ public class ChildService {
     public List<Child> getSearchedChildren(String term){
         List<Child> completeList = new ArrayList<>();
         if(term.indexOf(" ") == -1){
-            completeList.addAll(childRepository.findByFirst(term));
-            completeList.addAll(childRepository.findByLast(term));
+            completeList.addAll(childRepository.findByFirstIgnoreCase(term));
+            completeList.addAll(childRepository.findByLastIgnoreCase(term));
         }
         else{
             String[] terms = term.split(" ");
-            completeList.addAll(childRepository.findByFirst(terms[0]));
-            completeList.addAll(childRepository.findByLast(terms[1]));
+            completeList.addAll(childRepository.findByFirstIgnoreCase(terms[0]));
+            completeList.addAll(childRepository.findByLastIgnoreCase(terms[1]));
         }
         return completeList;
     }
