@@ -12,9 +12,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - mvn jacoco:report
-      - mvn xml:transform
-      - echo \"$(cat target/generated-resources/xml/xslt/target/site/jacoco/jacoco.xml)% covered\"
 artifacts:
   files:
     - horizons-proj/target/horizons-proj-0.0.1-SNAPSHOT.jar
