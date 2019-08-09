@@ -26,6 +26,11 @@ public class EmployeeController {
     @Autowired
     private ChildService childService;
 
+    EmployeeController(EmployeeService service, EmployeeRepository repository) {
+        this.repository = repository;
+        this.employeeService = service;
+    }
+
     EmployeeController(EmployeeRepository repository) { this.repository = repository; }
 
     List<Employee> findAll() {

@@ -1,4 +1,4 @@
-package ots.andy.group.horizonsproj.services;
+package ots.andy.group.horizonsproj.controllers;
 
 import org.apache.coyote.Response;
 import org.junit.Before;
@@ -19,6 +19,7 @@ import ots.andy.group.horizonsproj.entities.Personality;
 import ots.andy.group.horizonsproj.entities.Status;
 import ots.andy.group.horizonsproj.repositories.AllergyRepository;
 import ots.andy.group.horizonsproj.repositories.DaycareRepository;
+import ots.andy.group.horizonsproj.services.StatusService;
 
 import java.util.ArrayList;
 import java.util.List;

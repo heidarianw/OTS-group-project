@@ -25,6 +25,10 @@ class ParentController {
     ParentController(ParentRepository repository) {
         this.repository = repository;
     }
+    ParentController(ParentService service, ParentRepository repository) {
+        this.repository = repository;
+        this.parentService = service;
+    }
 
     List<Parent> findAll() {
         return repository.findAll();
