@@ -8,6 +8,7 @@ import ots.andy.group.horizonsproj.entities.Allergy;
 import ots.andy.group.horizonsproj.entities.Daycare;
 import ots.andy.group.horizonsproj.repositories.AllergyRepository;
 import ots.andy.group.horizonsproj.repositories.DaycareRepository;
+import ots.andy.group.horizonsproj.services.AllergyService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ots.andy.group.horizonsproj.entities.Daycare;
+import ots.andy.group.horizonsproj.services.AllergyService;
 import ots.andy.group.horizonsproj.services.DaycareService;
 
 import java.util.List;
@@ -16,8 +17,12 @@ import java.util.List;
 @CrossOrigin(origins= {"http://localhost:3000", "http://horizons-frontend-bucket-1.s3-website-us-west-1.amazonaws.com"})
 public class DaycareController {
 
+    private final DaycareService service;
     @Autowired
-    private DaycareService service;
+    public DaycareController(DaycareService daycareService)
+    {
+        this.service = daycareService;
+    }
 
     @GetMapping(path="/daycare", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Daycare> getAllDaycare(){

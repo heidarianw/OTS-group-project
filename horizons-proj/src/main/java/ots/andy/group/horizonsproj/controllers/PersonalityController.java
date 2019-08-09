@@ -11,6 +11,7 @@ import ots.andy.group.horizonsproj.entities.Parent;
 import ots.andy.group.horizonsproj.entities.Personality;
 import ots.andy.group.horizonsproj.entities.Status;
 import ots.andy.group.horizonsproj.repositories.StatusRepository;
+import ots.andy.group.horizonsproj.services.DaycareService;
 import ots.andy.group.horizonsproj.services.PersonalityService;
 import ots.andy.group.horizonsproj.services.StatusService;
 
@@ -20,8 +21,12 @@ import java.util.List;
 @CrossOrigin(origins= {"http://localhost:3000", "http://horizons-frontend-bucket-1.s3-website-us-west-1.amazonaws.com"})
 public class PersonalityController {
 
+    private final PersonalityService service;
     @Autowired
-    private PersonalityService service;
+    public PersonalityController(PersonalityService personalityService)
+    {
+        this.service = personalityService;
+    }
 
     @GetMapping(path="/personality", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Personality> getAllPersonality(){
