@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import ots.andy.group.horizonsproj.entities.Child;
 import ots.andy.group.horizonsproj.entities.Employee;
 import ots.andy.group.horizonsproj.repositories.EmployeeRepository;
 import ots.andy.group.horizonsproj.services.EmployeeService;
@@ -47,6 +48,24 @@ public class EmployeeControllerTest {
         when(service.addEmployee(any(Employee.class))).thenReturn(true);
         ResponseEntity<Employee> out = controller.createEmployee(d);
         verify(service, times(1)).addEmployee(d);
+        assertTrue(resp.equals(out));
+    }
+
+    @Test
+    public void testLoginEmp() {
+        ResponseEntity<Employee> resp = new ResponseEntity(d, HttpStatus.OK);
+        when(service.loginEmployee(any(Employee.class))).thenReturn(true);
+        ResponseEntity<Employee> out = controller.loginEmployee(d);
+        verify(service, times(1)).loginEmployee(d);
+        assertTrue(resp.equals(out));
+    }
+
+    @Test
+    public void testUpdateInfo() {
+        ResponseEntity<Employee> resp = new ResponseEntity(d, HttpStatus.OK);
+        when(service.updateInfo(any(Employee.class))).thenReturn(true);
+        ResponseEntity<Employee> out = controller.updateInfo(d);
+        verify(service, times(1)).updateInfo(d);
         assertTrue(resp.equals(out));
     }
 }

@@ -11,6 +11,7 @@ import ots.andy.group.horizonsproj.entities.Child;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import ots.andy.group.horizonsproj.repositories.ChildRepository;
 import ots.andy.group.horizonsproj.services.ChildService;
 
 import java.util.List;
@@ -21,6 +22,10 @@ public class ChildController {
 
     @Autowired
     private ChildService childService;
+
+    ChildController(ChildService service) {
+        this.childService = service;
+    }
 
     @GetMapping(path="/children", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Child> getAllParents(){
